@@ -1,0 +1,67 @@
+@model DistributedPatientHealthCareSystem.DPHCSModels.Appointment
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Appointment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AppointmentStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AppointmentStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Discription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Discription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeldDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeldDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SetedDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SetedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitReson)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VisitReson)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DoctorEmployee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DoctorEmployee.JoinDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.RegDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceptionistEmployeet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReceptionistEmployeet.JoinDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AppointmentId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

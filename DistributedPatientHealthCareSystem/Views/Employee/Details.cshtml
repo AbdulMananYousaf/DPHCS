@@ -1,0 +1,68 @@
+@model DistributedPatientHealthCareSystem.DPHCSModels.Employee
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_AdminLayout";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeNavigation.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeNavigation.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JoinDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JoinDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Spectialization)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Spectialization)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeNavigation.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeNavigation.PersonNavigation.Role)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeNavigation.PersonNavigation.Role)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

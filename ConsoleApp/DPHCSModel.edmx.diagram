@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b23662eb1f454883b25d0100b5fe4fa9" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="DPHCSModel.Appointment" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.AspNetRoleClaim" Width="1.5" PointX="15" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.AspNetRole" Width="1.5" PointX="12.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.AspNetUserClaim" Width="1.5" PointX="17.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.AspNetUser" Width="1.5" PointX="15" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.DoctorSpecializationList" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.Employee" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.Hospital" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.LabTestOrder" Width="1.5" PointX="10.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.LabTestResult" Width="1.5" PointX="12.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.Patient" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.PatientAllergie" Width="1.5" PointX="10.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.PatientHealthRecord" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.PatientPrescription" Width="1.5" PointX="10.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.PatientVital" Width="1.5" PointX="10.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.Person" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.TestBloodGroup" Width="1.5" PointX="13.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DPHCSModel.UserAccount" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <AssociationConnector Association="DPHCSModel.FK_Appointment_DoctorEmployeeId" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_Appointment_ReceptionistEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_Appointments_Patients" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_AspNetRoleClaims_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_AspNetUserClaims_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_Employee_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_PatientHealthRecord_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_TestBloodGroup_LabEmplyeeId" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_HealthRecords_Hospitals" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_HealthReportOrders_HealthRecords" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_LabTestResult_LabTestOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_LabTestResult__PatientHealthRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_HealthRecords_PatientDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_Patients_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_Allergies_PatientHealthRecords" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_BloodGroupTests_HealthRecords" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_Prescriptions_PatientHealthRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_Vitals_PatientHealthRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.FK_UserAccount_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="DPHCSModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

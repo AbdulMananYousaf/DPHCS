@@ -1,0 +1,86 @@
+@model DistributedPatientHealthCareSystem.DPHCSModels.Appointment
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Appointment</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="AppointmentId" />
+        <div class="form-group">
+            <label asp-for="AppointmentStatus" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AppointmentStatus" class="form-control" />
+                <span asp-validation-for="AppointmentStatus" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Discription" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Discription" class="form-control" />
+                <span asp-validation-for="Discription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DoctorEmployeeId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="DoctorEmployeeId" class="form-control" asp-items="ViewBag.DoctorEmployeeId"></select>
+                <span asp-validation-for="DoctorEmployeeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HeldDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="HeldDate" class="form-control" />
+                <span asp-validation-for="HeldDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PatientId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="PatientId" class="form-control" asp-items="ViewBag.PatientId"></select>
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ReceptionistEmployeetId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="ReceptionistEmployeetId" class="form-control" asp-items="ViewBag.ReceptionistEmployeetId"></select>
+                <span asp-validation-for="ReceptionistEmployeetId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SetedDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SetedDate" class="form-control" />
+                <span asp-validation-for="SetedDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="VisitReson" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="VisitReson" class="form-control" />
+                <span asp-validation-for="VisitReson" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

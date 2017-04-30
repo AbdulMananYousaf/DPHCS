@@ -1,0 +1,215 @@
+@model DistributedPatientHealthCareSystem.DPHCSModels.Employee
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_AdminLayout";
+}
+
+<h2>@ViewBag.E</h2>
+<h2>Create</h2>
+
+ @* <form asp-action="Create" asp-contoller="Employee" class="form-horizontal col-md-6">*@
+      <form asp-controller="Employee" asp-action="Create" method="post"class="form-horizontal col-md-6">
+          <h4>Employee</h4>
+          <hr />
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          <div class="form-group hidden">
+                  <input asp-for="@Model.EmployeeNavigation.PersonNavigation.Password" value="Pakistan3@@"class="form-control" />
+          </div>
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.PersonNavigation.Role" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  @Html.DropDownList("EmployeeNavigation.PersonNavigation.Role", new List<SelectListItem>{
+                    new SelectListItem{ Text="Receptionist", Value="Receptionist"},
+                new SelectListItem{ Text="Doctor", Value="Doctor"},
+                    new SelectListItem{ Text="Laboratory Technician", Value="Laboratory Technician"}
+                    }, "---- Select Role ----",
+                    new { @class = "form-control" }
+                    )
+                  <span asp-validation-for="@Model.EmployeeNavigation.PersonNavigation.Role" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group" id="forDoctor" name="forDoctor">
+              <label asp-for="Spectialization" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <select class="form-control" id="Spectialization" name="Spectialization">
+                      <option selected="selected" value="">---- Select Spectialization ----</option>
+                      <option value="Allergy Specialist">Allergy Specialist</option>
+                      <option value="Anesthesiologist">Anesthesiologist</option>
+                      <option value="Anesthesia">Anesthesia</option>
+                      <option value="Audiologist">Audiologist</option>
+                      <option value="Breast Specialist">Breast Specialist</option>
+                      <option value="Cardiologist">Cardiologist</option>
+                      <option value="Cardiology">Cardiology</option>
+                      <option value="Counselling Specialists">Counselling Specialists</option>
+                      <option value="clinical psychology">clinical psychology</option>
+                      <option value="Community Medicine consultant">Community Medicine consultant</option>
+                      <option value="Consultant Homeopathic Physician">Consultant Homeopathic Physician</option>
+                      <option value="Consultant Radiologist">Consultant Radiologist</option>
+                      <option value="Consultant Radiologist (FCPS)">Consultant Radiologist (FCPS)</option>
+                      <option value="Cardiologists">Cardiologists</option>
+                      <option value="Cardiac Surgeon">Cardiac Surgeon</option>
+                      <option value="Child Specialist">Child Specialist</option>
+                      <option value="Dental surgeon">Dental surgeon</option>
+                      <option value="Diabetes and Endocrine">Diabetes and Endocrine</option>
+                      <option value="Diabetologist">Diabetologist</option>
+                      <option value="Diabetologists">Diabetologists</option>
+                      <option value="Dermatologist">Dermatologist</option>
+                      <option value="Dentist">Dentist</option>
+                      <option value="Skin Specialists | Dermatologists">Skin Specialists | Dermatologists</option>
+                      <option value="Family physician and Sonologist">Family physician and Sonologist</option>
+                      <option value="FCPS Radiology">FCPS Radiology</option>
+                      <option value="Gastroenrologist/Hepatologist">Gastroenrologist/Hepatologist</option>
+                      <option value="Gastroenterology, Hepatology">Gastroenterology, Hepatology</option>
+                      <option value="General, Laparoscopic and Oncoplastic Surgeon">General, Laparoscopic and Oncoplastic Surgeon</option>
+                      <option value="General Medicine">General Medicine</option>
+                      <option value="General physician/ practitoner">General physician/ practitoner</option>
+                      <option value="General Physician">General Physician</option>
+                      <option value="General Practitioner">General Practitioner</option>
+                      <option value="General Surgeon">General Surgeon</option>
+                      <option value="Gastroenterology">Gastroenterology</option>
+                      <option value="Gynecologists">Gynecologists</option>
+                      <option value="HLT">Hematologist</option>
+                      <option value="Medical Specialist">Medical Specialist</option>
+                      <option value="Neurosurgeon">Neurosurgeon</option>
+                      <option value="ophthalmology-">ophthalmology</option>
+                      <option value="Ophthalmologist">Ophthalmologist</option>
+                      <option value="Orthopaedics">Orthopaedics </option>
+                      <option value="Orthopaedic-">Orthopaedic</option>
+                      <option value="Orthopedics">Orthopedics</option>
+                      <option value="Oncologist">Oncologist </option>
+                      <option value="Paediatric Medicine">Paediatric Medicine</option>
+                      <option value="Paediatrician">Paediatrician</option>
+                      <option value="paediatrics">paediatrics</option>
+                      <option value="Surgeon">Surgeon</option>
+                      <option value="Pediatric Neurologist">Pediatric Neurologist</option>
+                      <option value="Pediatricians">Pediatricians</option>
+                  </select>
+
+                  @*<select class="form-control" id="Spectialization" name="Spectialization">
+
+                        <option selected="selected" value="">---- Select Spectialization ----</option>
+                        <option value="AGP">Clinical Chemistry </option>
+                        <option value="AGP">Flow Cytometry </option>
+                        <option value="AGP">Hematology </option>
+                        <option value="AGP">Immunohematology </option>
+                        <option value="AGP">Microbiology </option>
+                        <option value="AGP">Molecular Diagnostics </option>
+                        <option value="AGP">Serology </option>
+                        <option value="AGP">Urinalysis </option>
+                    </select>*@
+
+                  <span asp-validation-for="Spectialization" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.FirstName" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="@Model.EmployeeNavigation.FirstName" class="form-control" />
+                  <span asp-validation-for="@Model.EmployeeNavigation.FirstName" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.LastName" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="@Model.EmployeeNavigation.LastName" class="form-control" />
+                  <span asp-validation-for="@Model.EmployeeNavigation.LastName" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.Gender" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  @Html.DropDownList("EmployeeNavigation.Gender", new List<SelectListItem>{
+                    new SelectListItem{ Text="Male", Value="Male"},
+                    new SelectListItem{ Text="Female", Value="Female"},
+                    new SelectListItem{ Text="Other", Value="Other"}
+                    }, "--- Select Gender ---",
+                    new { @class = "form-control" }
+                    )
+                  <span asp-validation-for="@Model.EmployeeNavigation.Gender" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.Cnic" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="@Model.EmployeeNavigation.Cnic" class="form-control" />
+                  <span asp-validation-for="@Model.EmployeeNavigation.Cnic" class="text-danger"></span>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.Email" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="@Model.EmployeeNavigation.Email" class="form-control" />
+                  <span asp-validation-for="@Model.EmployeeNavigation.Email" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.Mobile" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="@Model.EmployeeNavigation.Mobile" class="form-control" />
+                  <span asp-validation-for="@Model.EmployeeNavigation.Mobile" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.Address" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="@Model.EmployeeNavigation.Address" class="form-control" />
+                  <span asp-validation-for="@Model.EmployeeNavigation.Address" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label asp-for="@Model.EmployeeNavigation.DoB" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="@Model.EmployeeNavigation.DoB" class="form-control" />
+                  <span asp-validation-for="@Model.EmployeeNavigation.DoB" class="text-danger"></span>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label asp-for="Salary" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="Salary" class="form-control" min="0" />
+                  <span asp-validation-for="Salary" class="text-danger"></span>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label asp-for="Status" class="col-md-3 control-label"></label>
+              <div class="col-md-9">
+                  <input asp-for="Status" class="form-control" />
+                  <span asp-validation-for="Status" class="text-danger"></span>
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="col-md-offset-3 col-md-9">
+                  <input type="submit" value="Create" class="btn btn-default" />
+              </div>
+          </div>
+
+      </form>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+            $(function () {
+                $('#forDoctor').fadeOut();
+                $("#EmployeeNavigation_PersonNavigation_Role").change(function () {
+                    var currentValue = $("#EmployeeNavigation_PersonNavigation_Role option:selected").text();
+                    if (currentValue != 'Doctor') {
+                        $('#forDoctor').fadeOut();
+                    }
+                    else {
+                        $('#forDoctor').fadeIn();
+                    }
+                  
+                    
+                    
+                });
+            });
+        </script>
+    }

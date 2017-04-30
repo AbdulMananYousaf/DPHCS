@@ -1,0 +1,223 @@
+﻿@model IEnumerable<DistributedPatientHealthCareSystem.DPHCSModels.Appointment>
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml";}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<h1 id="header">Header is</h1>
+<style>
+    .badge-pending {
+        background-color: #b94a48;
+    }
+    .badge-pospond {
+        background-color: #f89406;
+    }
+    .badge-completed {
+        background-color: #468847;
+    }
+</style>
+
+
+@*<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered table-hover" id="tab_logic">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            #
+                        </th>
+                        <th class="text-center">
+                            Name
+                        </th>
+                        <th class="text-center">
+                            Mail
+                        </th>
+                        <th class="text-center">
+                            Mobile
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id='addr0'>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <input type="text" name='name0' placeholder='Name' class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" name='mail0' placeholder='Mail' class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" name='mobile0' placeholder='Mobile' class="form-control" />
+                        </td>
+                    </tr>
+                    <tr id='addr1'></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
+</div>*@
+
+<div class="container">
+    <h1>Doctor</h1>
+    <input type="text" id="message" />
+    <input type="button" id="sendmessage" value="Send" />
+    <input type="hidden" id="displayname" />
+    <ul id="discussion"></ul>
+</div>
+          
+            @using (var db = new DistributedPatientHealthCareSystem.DPHCSModels.DPHCSContext())
+            {
+
+                int  Pending = db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Pending").Count();
+                int postpond = db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Postpond").Count();
+                int completed = db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Completed").Count();
+                
+      <ul class="nav nav-tabs">
+        <li class="active col-md-4"><a class="text-center" data-toggle="tab" href="#home">Pending Appointments 
+            <span class="badge badge-pending">@Pending</span></a></li>
+        <li class="col-md-4"><a class="text-center" data-toggle="tab" href="#menu1">Postpond Appointments
+             <span class="badge badge-pospond">@postpond</span></a></li>
+        <li class="col-md-4"><a class="text-center" data-toggle="tab" href="#menu2">Completed Appointments
+             <span class="badge badge-completed">@completed</span></a></li>
+    </ul>
+            }
+    <div class="tab-content ">
+            <div id="home" class="tab-pane fade in active">
+               @Html.Partial("_PartialForAppointmnetList", new ViewDataDictionary(this.Vi‌​ewData) { { "Status", "Pending" } })
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                @Html.Partial("_PartialForAppointmnetList", new ViewDataDictionary(this.Vi‌​ewData) { { "Status", "Postpond" } })
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                @Html.Partial("_PartialForAppointmnetList", new ViewDataDictionary(this.Vi‌​ewData) { { "Status", "Completed" } })
+            </div>
+        </div>
+
+    <style>
+        .nav-tabs > li {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    </style>
+
+
+
+
+@section Scripts{
+    <script>
+
+        
+        //AppendCount = 1
+        //$('#AppointmnetTable').append('<tr id="addr' + (AppendCount + 1) + '"></tr>');
+        //var trno = parseInt(AppendCount) + 1;
+        //$('#addr' + trno).append("\r\n\r\n\r\n                        <td>\r\n                            Not Pending\r\n                        </td>\r\n                        <td>\r\n                            Friday, 28/04/2017 10:14 pm\r\n                        </td>\r\n                        <td>\r\n                            Friday, 28/04/2017 10:14 pm\r\n                        </td>\r\n                        <td>\r\n                            Friday, April 28, 2017\r\n                        </td>\r\n                        <td>\r\n                            maleria\r\n                        </td>\r\n                        <td>\r\n                            No Visit\r\n                        </td>\r\n                        <td></td>\r\n                        <td></td>\r\n                        <td></td>\r\n                        <td>\r\n                            <a href=\"/Doctor/Edit/105\">Edit</a> |\r\n                            <a href=\"/Doctor/Details/105\">Details</a> |\r\n                            <a href=\"/Doctor/Delete/105\">Delete</a>\r\n                        </td>\r\n\r\n");
+        
+    </script>
+    
+@*<script>
+    $(document).ready(function () {
+
+       
+        $('#addr' + 1).html('<td>fs</td><td>sds</td><td>hdhzkh</td>');
+        $('#tab_logic').append('<tr id="addr' + 1 + '"></tr>');
+             var i = 1;
+             $("#add_row").click(function () {
+                 $('#addr' + i).html("<td>" + (i + 1) + "</td><td><input name='name" + i + "' type='text' placeholder='Name' class='form-control input-md'  /> </td><td><input  name='mail" + i + "' type='text' placeholder='Mail'  class='form-control input-md'></td><td><input  name='mobile" + i + "' type='text' placeholder='Mobile'  class='form-control input-md'></td>");
+
+                 $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
+                 i++;
+             });
+             $("#delete_row").click(function () {
+                 if (i > 1) {
+                     $("#addr" + (i - 1)).html('');
+                     i--;
+                 }
+             });
+
+         });
+</script>*@
+
+
+    <!--Script references. -->
+    <!--Reference the jQuery library. -->
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+    <!--Reference the SignalR library. -->
+    <script src="Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/lib/jquery.signalR.core/jquery.signalR.core.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="signalr/hubs"></script>
+    <!--Add script to update the page and send messages.-->
+    <script type="text/javascript">
+        $(function () {
+            //window.onbeforeunload = confirmExit;
+            //function confirmExit() {
+            //    return "You have attempted to leave this page. Are you sure?";
+            //}
+            // Declare a proxy to reference the hub.
+            var chat = $.connection.chatHub;
+            // Create a function that the hub can call to broadcast messages.
+            AppendCount = 1;
+            chat.client.broadcastMessage = function (name, message) {
+                // Html encode display name and message.
+                var encodedName = $('<div />').text(name).html();
+                var encodedMsg = $('<div />').text(message).html();
+                // Add the message to the page.
+
+                $('#discussion').append('<li><strong>' + encodedName
+                   + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+
+                var newtext = $("<textarea/>").html(message).val();
+                alert(newtext);
+
+                var mymessage = $('<div />').text(message).html();
+                //Appointment Table update
+                $('#AppointmnetTable').append('<tr id="addr' + (AppendCount + 1) + '"></tr>');
+                var trno = parseInt(AppendCount) + 1;
+               $('#1_Pending').append('<tr>' + encodedMsg + '</tr>');
+                //document.getElementById('#addr1').innerHTML += message;
+               //var mytext = $('#discussion').html();
+
+               if (message == "YourAppointmentListUpdated") {
+                   alert("Tis is Call For YourAppointmentListUpdated");
+               }
+               else { 
+                   alert("OPP's");
+               }
+              
+                        
+                                    var PendingCount = parseInt($('.badge-pending').html());
+                                    $('.badge-pending').html((PendingCount + 1));
+                                    AppendCount++;
+                                    
+                                };
+                                // Get the user name and store it to prepend to messages.
+                                         //$('#displayname').val(prompt('Enter your name:', ''));
+                                // Set initial focus to message input box.
+                                $('#message').focus();
+                                $.connection.hub.qs = "UserId="+@User.Identity.Name;
+                                // Start the connection.
+                                $.connection.hub.start().done(function () {
+                                    $('#sendmessage').click(function () {
+                                        // Call the Send method on the hub.
+                                        chat.server.send($('#displayname').val(), $('#message').val());
+                                        // Clear text box and reset focus for next comment.
+                                        $('#message').val('').focus();
+                                        
+                                    })
+                                        .fail(function () {
+                                            alert("");
+                                            console.log('Could not connect');
+                                        })
+                                     });
+                             });
+
+      
+
+
+    </script>
+
+}

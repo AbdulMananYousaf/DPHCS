@@ -1,0 +1,72 @@
+@model DistributedPatientHealthCareSystem.DPHCSModels.Appointment
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Appointment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="AppointmentId" />
+        <dt>
+            @Html.DisplayNameFor(model => model.AppointmentStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AppointmentStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Discription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Discription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeldDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeldDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SetedDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SetedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitReson)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VisitReson)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DoctorEmployee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DoctorEmployee.JoinDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.RegDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceptionistEmployeet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReceptionistEmployeet.JoinDate)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>

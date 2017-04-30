@@ -1,0 +1,101 @@
+@model DistributedPatientHealthCareSystem.DPHCSModels.Patient
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_AdminLayout";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Patient</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PatientId" />
+
+        <div class="form-group">
+            <label asp-for="@Model.PatientId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientId" class="form-control " disabled="disabled" />
+                <span asp-validation-for="@Model.PatientId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PatientNavigation.FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientNavigation.FirstName" class="form-control" />
+                <span asp-validation-for="@Model.PatientNavigation.FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PatientNavigation.LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientNavigation.LastName" class="form-control" />
+                <span asp-validation-for="@Model.PatientNavigation.LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PatientNavigation.Gender" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientNavigation.Gender" class="form-control" />
+                <span asp-validation-for="@Model.PatientNavigation.Gender" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PatientNavigation.Cnic" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientNavigation.Cnic" class="form-control" />
+                <span asp-validation-for="@Model.PatientNavigation.Cnic" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PatientNavigation.Email" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientNavigation.Email" class="form-control" />
+                <span asp-validation-for="@Model.PatientNavigation.Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PatientNavigation.Mobile" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientNavigation.Mobile" class="form-control" />
+                <span asp-validation-for="@Model.PatientNavigation.Mobile" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PatientNavigation.Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientNavigation.Address" class="form-control" />
+                <span asp-validation-for="@Model.PatientNavigation.Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.PatientNavigation.DoB" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.PatientNavigation.DoB" class="form-control" />
+                <span asp-validation-for="@Model.PatientNavigation.DoB" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group hidden">
+            <label asp-for="RegDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="RegDate" class="form-control" />
+                <span asp-validation-for="RegDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,137 @@
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model DistributedPatientHealthCareSystem.DPHCSModels.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    //String MyDate = "4/21/2017 3:37 AM";
+    //DateTime MyDateTime = Convert.ToDateTime(MyDate);
+}
+@*<h1>@MyDateTime</h1>*@
+<h2>Create</h2>
+<h1 id="header">Header is</h1>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Appointment</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="PatientId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="PatientId" class="form-control" asp-items="ViewBag.PatientId"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="VisitReson" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="VisitReson" class="form-control" />
+                <span asp-validation-for="VisitReson" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-md-2 control-label">Spelization</label>
+            <div class="col-md-10">
+                <select id="DoctorSpecilization" name="DoctorSpecilization"class="form-control" asp-items="ViewBag.DoctorSpecializationList"></select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Doctor</label>
+            <div class="col-md-10" id="DoctorId">
+             @*   <select asp-for="DoctorEmployeeId" class="form-control"></select>*@
+          
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label  class="col-md-2 control-label">Date</label>
+            <div class="col-md-10">
+                <input asp-for="HeldDate" type="text" id="date" class="form-control" />
+            </div>
+        </div>
+      
+      
+        <div class="form-group">
+            <label asp-for="Discription" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Discription" class="form-control" />
+                <span asp-validation-for="Discription" class="text-danger"></span>
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+        <script>
+            $(document).ready(function () {
+                alert("Ente");
+               
+                $("#DoctorId").prop("disabled", true);
+                $("#DoctorSpecilization").change(function () {
+
+                    if ($("#DoctorSpecilization").val() != "Select") {
+                        var DoctorValue = $("#DoctorSpecilization").val().split(' ').join('%20');
+                       
+                        $("#DoctorId").load("/Appointment/_PartialAppointmentDoctor?DoctorSpecilization=" + DoctorValue);
+                        //$.ajax({
+                        //    url: "/Appointment/DoctorList?DoctorSpecilization=" + DoctorValue,
+                        //    datatype: "json",
+                        //    type: "Get",
+                        //    success: function (DoctorList) {
+                                
+                        //        var DL = DoctorList;
+                        //        alert("This is " + DoctorList.length);
+                        //        for (var i = 0, len = DL.length; i < len; i++) {
+                        //            var json = JSON.parse(DL[i]);
+                        //            alert(json.Text);
+                        //        }
+                        //        alert("This is " + DoctorList);
+                        //        $("#DoctorEmployeeId").empty();
+                        //        for (var i = 0; i < DoctorList.length; i++) {
+                        //            $("#DoctorEmployeeId").append("<option>" + DoctorList[i] + "</option>");
+                        //        }
+                        //        $("#DoctorEmployeeId").prop("disabled", false);
+                        //    }
+                        //});
+
+                    }
+                    //else {
+                    //    $("#DoctorEmployeeId").empty();
+                    //    $("#DoctorEmployeeId").prop("disabled", true);
+                    //}
+                });
+
+
+                $('#date').datetimepicker({
+                    dateFormat: 'DD' + ',' + ' ' + 'dd/mm/yy',
+                    timeFormat: "hh:mm tt"
+                });
+            });
+
+            
+        </script>
+
+    
+   }       
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+

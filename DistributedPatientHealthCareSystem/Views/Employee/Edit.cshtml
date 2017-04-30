@@ -1,0 +1,153 @@
+@model DistributedPatientHealthCareSystem.DPHCSModels.Employee
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_AdminLayout";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Employee</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="EmployeeId" />
+        <input type="hidden" asp-for="@Model.EmployeeNavigation.PersonId" />
+        <input type="hidden" asp-for="@Model.EmployeeNavigation.PersonNavigation.UserAccountId" />
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeId" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input class="form-control  " disabled="disabled"value="@Model.EmployeeId"/>
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            <label asp-for="@Model.EmployeeNavigation.PersonNavigation.Role" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.PersonNavigation.Role" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.PersonNavigation.Role" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.PersonNavigation.Password" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.PersonNavigation.Password" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.PersonNavigation.Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.FirstName" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.LastName" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.Gender" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.Gender" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.Gender" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.Cnic" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.Cnic" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.Cnic" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.Email" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.Email" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.Mobile" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.Mobile" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.Mobile" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.Address" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.Address" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EmployeeNavigation.DoB" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.DoB" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.DoB" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group hidden">
+            <label asp-for="@Model.EmployeeNavigation.ProfilePic" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.ProfilePic" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.ProfilePic" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group hidden">
+            <label asp-for="@Model.EmployeeNavigation.Age" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="@Model.EmployeeNavigation.Age" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeNavigation.Age" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group hidden">
+            <label asp-for="JoinDate" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="JoinDate" class="form-control" />
+                <span asp-validation-for="JoinDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Salary" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="Salary" class="form-control" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Spectialization" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="Spectialization" class="form-control" />
+                <span asp-validation-for="Spectialization" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
