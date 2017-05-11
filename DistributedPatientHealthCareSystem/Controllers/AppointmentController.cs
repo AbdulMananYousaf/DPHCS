@@ -47,7 +47,11 @@ namespace DistributedPatientHealthCareSystem.Controllers
         // GET: Appointment
         public async Task<IActionResult> Index()
         {
+            
 
+            var Checkonline = _context.UserConnection.FirstOrDefault(c => c.UserName == "87");
+            IHubContext context = Startup.ConnectionManager.GetHubContext<ChatHub>();
+            await context.Clients.Client(Checkonline.ConnectionID).broadcastMessage("123","123");
 
             var dPHCSContext = _context.Appointment.Include(a => a.DoctorEmployee).Include(a => a.Patient).Include(a => a.ReceptionistEmployeet);
 
@@ -207,7 +211,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
                     String DecodedString = System.Net.WebUtility.HtmlDecode(AppendNewAppointment);
 
                     IHubContext context = Startup.ConnectionManager.GetHubContext<ChatHub>();
-                    await context.Clients.Client(Checkonline.ConnectionID).broadcastMessage(1);
+                    await context.Clients.Client(Checkonline.ConnectionID).broadcastMessage(AppendNewAppointment);
 
                 }
                 try

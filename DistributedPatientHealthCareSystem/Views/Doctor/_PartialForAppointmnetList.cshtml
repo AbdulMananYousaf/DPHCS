@@ -4,12 +4,113 @@
     string Status = this.ViewData.ContainsKey("Status") ? this.ViewData["Status"].ToString() : string.Empty;
 }
 
+@if (Model.Count() != 0)
+{
+    <table class="table" id="AppointmnetTable" name="AppointmnetTable">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AppointmentStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeldDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SetedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VisitReson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientLastVisitDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoctorEmployee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceptionistEmployeet)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{ int count = 0;}
+
+            @foreach (var item in Model)
+            {
+
+                if (item.AppointmentStatus == Status)
+                {
+                    count++;
+                    <tr id="addr0">
+                        <td>@count</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppointmentStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Discription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HeldDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SetedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VisitReson)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PatientLastVisitDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DoctorEmployee.JoinDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Patient.RegDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReceptionistEmployeet.JoinDate)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+
+
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+
+
+    <h3 style="text-align:center;margin-top:5%">  No @Status Appointment found</h3>
+
+
+}
 
 
 
-<div class="panel">
+
+
+
+@*<div class="panel">
     <div class="panel-heading">
-        @*<h3 class="panel-title">Appointment Detail</h3>*@
+       <h3 class="panel-title">Appointment Detail</h3>
     </div>
     <div class="panel-body">
         <div class="agenda">
@@ -83,124 +184,6 @@
         </div>
 
     </div>
-</div>
+</div>*@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@if (Model.Count() != 0)
-{
-        <table class="table" id="AppointmnetTable" name="AppointmnetTable">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.AppointmentStatus)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Discription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeldDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SetedDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VisitReson)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PatientLastVisitDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DoctorEmployee)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Patient)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ReceptionistEmployeet)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-
-
-            <h1>VAlue OD STATUS IS @Status</h1>
-            @foreach (var item in Model)
-            {
-
-                if (item.AppointmentStatus == Status)
-                {
-                    <tr id="addr0">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AppointmentStatus)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Discription)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HeldDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SetedDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.VisitReson)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PatientLastVisitDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DoctorEmployee.JoinDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Patient.RegDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReceptionistEmployeet.JoinDate)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
-                        </td>
-                    </tr>
-
-                }
-                
-
-            }
-            <tr id="1_@Status"></tr>
-        </tbody>
-    </table>
-}
-else
-{
-    
-    
-        <h3>  No @Status Appointment</h3>
-  
-        
-}
