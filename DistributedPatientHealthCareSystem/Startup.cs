@@ -24,9 +24,10 @@ namespace DistributedPatientHealthCareSystem
     public class Startup
     {
         public static IConnectionManager ConnectionManager;
+       
+       
         public Startup(IHostingEnvironment env)
         {
-
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -40,6 +41,7 @@ namespace DistributedPatientHealthCareSystem
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -47,8 +49,8 @@ namespace DistributedPatientHealthCareSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
-           
+
+
             // Add framework services.
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -56,6 +58,9 @@ namespace DistributedPatientHealthCareSystem
             services.AddDbContext<DPHCSContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DPHCSConnection")));
 
+
+           
+          
             services.AddIdentity<ApplicationUser, IdentityRole>(
                 x =>
                 {
@@ -90,6 +95,8 @@ namespace DistributedPatientHealthCareSystem
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddTransient<DPHCSContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,13 +135,13 @@ namespace DistributedPatientHealthCareSystem
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            using (var context = new DPHCSContext())
-            {
+            var _context = app.ApplicationServices.GetService<DPHCSContext>();
 
-                context.Database.ExecuteSqlCommand("TRUNCATE TABLE [UserConnection]");
-                context.SaveChanges();
+            //Drop all old session in database
+            _context.Database.ExecuteSqlCommand("TRUNCATE TABLE [UserConnection]");
+            _context.SaveChanges();
 
-            }
+
             await RoleInitializer.Initialize(roleManager);
 
            
