@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DistributedPatientHealthCareSystem.DPHCSModels.Appointment>
 
 @{ Layout = "~/Views/Shared/_AdminLayout.cshtml";}
-@inject DistributedPatientHealthCareSystem.DPHCSModels.DPHCSContext db
+@inject DistributedPatientHealthCareSystem.DPHCSModels.DPHCSContext Db
 
 
 <style>
@@ -64,9 +64,9 @@
           
             @{
                 
-                int  Pending = db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Pending").Count();
-                int postpond = db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Postpond").Count();
-                int completed = db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Completed").Count();
+                int  Pending = Db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Pending").Count();
+                int postpond = Db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Postpond").Count();
+                int completed = Db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Completed").Count();
 
       <ul class="nav nav-tabs">
         <li class="active col-md-4"><a class="text-center" data-toggle="tab" href="#home">Pending Appointments 
