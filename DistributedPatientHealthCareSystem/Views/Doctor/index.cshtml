@@ -144,7 +144,14 @@
                 //Appointment Table update
                 //check previous td no.
                 prevNo = $('#AppointmnetTable tr:last td:first').html();
-                alert(prevNo)
+                if (prevNo == null) {
+                    AppendCount = 0;
+                   
+                   
+                }
+                
+                var tableVar = $("#AppointmnetTable").removeClass("hidden");
+                $("#IsPending").remove();
                 //add new tr and recived message
                 $('#AppointmnetTable').append('<tr id="addr' + (AppendCount + 1) + '">' + message + '</tr>');
 

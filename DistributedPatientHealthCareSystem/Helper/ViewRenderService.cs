@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,45 +14,56 @@ using System.Threading.Tasks;
 
 namespace DistributedPatientHealthCareSystem.Helper
 {
-    public class ViewRenderService
+    public interface IViewRenderService
     {
-        IRazorViewEngine _viewEngine;
-        IHttpContextAccessor _httpContextAccessor;
+        Task<string> RenderToStringAsync(string viewName, object model);
+    }
 
-        public ViewRenderService(IRazorViewEngine viewEngine, IHttpContextAccessor httpContextAccessor)
+    public class ViewRenderService : IViewRenderService
+    {
+        private readonly IRazorViewEngine _razorViewEngine;
+        private readonly ITempDataProvider _tempDataProvider;
+        private readonly IServiceProvider _serviceProvider;
+
+        public ViewRenderService(IRazorViewEngine razorViewEngine,
+            ITempDataProvider tempDataProvider,
+            IServiceProvider serviceProvider)
         {
-            _viewEngine = viewEngine;
-            _httpContextAccessor = httpContextAccessor;
+            _razorViewEngine = razorViewEngine;
+            _tempDataProvider = tempDataProvider;
+            _serviceProvider = serviceProvider;
         }
 
-        public string Render(string viewPath)
+        public async Task<string> RenderToStringAsync(string viewName, object model)
         {
-            return Render(viewPath, string.Empty);
-        }
+            var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
+            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
-        public string Render<TModel>(string viewPath, TModel model)
-        {
-
-            var viewEngineResult = _viewEngine.GetView("~/",viewPath, false);
-
-            if (!viewEngineResult.Success)
+            using (var sw = new StringWriter())
             {
-                throw new InvalidOperationException($"Couldn't find view {viewPath}");
-            }
+                var viewResult = _razorViewEngine.FindView(actionContext, viewName, false);
 
-            var view = viewEngineResult.View;
+                if (viewResult.View == null)
+                {
+                    throw new ArgumentNullException($"{viewName} does not match any available view");
+                }
 
-            using (var output = new StringWriter())
-            {
-                var viewContext = new ViewContext();
-                viewContext.HttpContext = _httpContextAccessor.HttpContext;
-                viewContext.ViewData = new ViewDataDictionary<TModel>(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-                { Model = model };
-                viewContext.Writer = output;
-               
-                view.RenderAsync(viewContext).GetAwaiter().GetResult();
+                var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
+                {
+                    Model = model
+                };
 
-                return output.ToString();
+                var viewContext = new ViewContext(
+                    actionContext,
+                    viewResult.View,
+                    viewDictionary,
+                    new TempDataDictionary(actionContext.HttpContext, _tempDataProvider),
+                    sw,
+                    new HtmlHelperOptions()
+                );
+
+                await viewResult.View.RenderAsync(viewContext);
+                return sw.ToString();
             }
         }
     }

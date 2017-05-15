@@ -31,15 +31,17 @@ namespace DistributedPatientHealthCareSystem.Controllers
 
         protected ICompositeViewEngine viewEngine;
 
-        ViewRenderService _ViewRenderService;
+        private readonly IViewRenderService _viewRenderService;
 
-        public AppointmentController(DPHCSContext context, IConnectionManager connectionManager,
-                                       ViewRenderService ViewRenderService
+        public AppointmentController(DPHCSContext context, 
+            IConnectionManager connectionManager,
+            IViewRenderService viewRenderService
             )
         {
             _connectionManager = connectionManager;
             _context = context;
-            _ViewRenderService = ViewRenderService;
+
+            _viewRenderService = viewRenderService;
 
         }
 
@@ -49,9 +51,9 @@ namespace DistributedPatientHealthCareSystem.Controllers
         {
             
 
-            var Checkonline = _context.UserConnection.FirstOrDefault(c => c.UserName == "87");
-            IHubContext context = Startup.ConnectionManager.GetHubContext<ChatHub>();
-            await context.Clients.Client(Checkonline.ConnectionID).broadcastMessage("123","123");
+            //var Checkonline = _context.UserConnection.FirstOrDefault(c => c.UserName == "87");
+            //IHubContext context = Startup.ConnectionManager.GetHubContext<ChatHub>();
+            //await context.Clients.Client(Checkonline.ConnectionID).broadcastMessage("123","123");
 
             var dPHCSContext = _context.Appointment.Include(a => a.DoctorEmployee).Include(a => a.Patient).Include(a => a.ReceptionistEmployeet);
 
@@ -201,14 +203,13 @@ namespace DistributedPatientHealthCareSystem.Controllers
 
                 if (Checkonline != null)
                 {
-                    String PartialViewPath = "\\Views\\Doctor\\_PartialForSingleAppointmnet.cshtml";
+                    
                     List<Appointment> NewAppointment = new List<Appointment>();
                     Appointment newAppointment = _context.Appointment.FirstOrDefault(a => a.AppointmentId == appointment.AppointmentId);
 
                     NewAppointment.Add(newAppointment);
-
-                    String AppendNewAppointment = _ViewRenderService.Render(PartialViewPath, NewAppointment);
-                    String DecodedString = System.Net.WebUtility.HtmlDecode(AppendNewAppointment);
+                    
+                    String AppendNewAppointment = await _viewRenderService.RenderToStringAsync("Doctor/_PartialForSingleAppointmnet", NewAppointment);
 
                     IHubContext context = Startup.ConnectionManager.GetHubContext<ChatHub>();
                     await context.Clients.Client(Checkonline.ConnectionID).broadcastMessage(AppendNewAppointment);
@@ -218,9 +219,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
                 {
 
                     return RedirectToAction("Index");
-                    //var url = Url.Action("Index");
-                    //return Content($"Go check out {url}, it's really great.");
-                    /*RedirectToRoute("Appointment/Index")*/
+                  
                 }
                 catch (NullReferenceException ex)
                 {

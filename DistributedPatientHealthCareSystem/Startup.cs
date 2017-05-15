@@ -78,8 +78,7 @@ namespace DistributedPatientHealthCareSystem
             services.AddSignalR();
 
             //Services for Conver View to String
-                services.AddTransient<ViewRenderService>();
-                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
 
             /////for creating session and us app.usesesssion
             services.AddDistributedMemoryCache();
@@ -95,8 +94,8 @@ namespace DistributedPatientHealthCareSystem
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddScoped<IViewRenderService, ViewRenderService>();
 
-           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

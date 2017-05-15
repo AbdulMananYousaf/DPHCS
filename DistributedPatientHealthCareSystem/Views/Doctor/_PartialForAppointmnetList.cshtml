@@ -98,10 +98,51 @@ else
 {
 
 
-    <h3 style="text-align:center;margin-top:5%">  No @Status Appointment found</h3>
+    <h3 id="IsPending" style="text-align:center;margin-top:5%">  No @Status Appointment found</h3>
+    
+    <table class="table hidden" id="AppointmnetTable" name="AppointmnetTable">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AppointmentStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeldDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SetedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VisitReson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientLastVisitDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoctorEmployee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceptionistEmployeet)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+           
+
+        </tbody>
+    </table>
 
 
-}
+                }
 
 
 
