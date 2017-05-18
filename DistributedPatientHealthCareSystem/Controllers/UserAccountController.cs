@@ -36,16 +36,39 @@ namespace DistributedPatientHealthCareSystem.Controllers
         {
 
             //Add Admin For DPHCS
-                //UserAccount AdminUserAccount = new UserAccount();
-                //AdminUserAccount.Password = "P@kistan3@";
-                //AdminUserAccount.Role = "Admin";
-                //await _context.AddAsync(AdminUserAccount);
-                //await _context.SaveChangesAsync();
-                //var user = new ApplicationUser { Id = AdminUserAccount.UserAccountId.ToString(), UserName = AdminUserAccount.UserAccountId.ToString() };
-                //var result = await _userManager.CreateAsync(user, AdminUserAccount.Password);
-                //await _userManager.AddToRoleAsync(user, "Admin");
+            //UserAccount AdminUserAccount = new UserAccount();
+            //AdminUserAccount.Password = "P@kistan3@";
+            //AdminUserAccount.Role = "Admin";
+            //await _context.AddAsync(AdminUserAccount);
+            //await _context.SaveChangesAsync();
+            //var user = new ApplicationUser { Id = AdminUserAccount.UserAccountId.ToString(), UserName = AdminUserAccount.UserAccountId.ToString() };
+            //var result = await _userManager.CreateAsync(user, AdminUserAccount.Password);
+            //await _userManager.AddToRoleAsync(user, "Admin");
             //Admin Added
+           
+        
+            if (User.Identity.Name != null)
+            {
+                var UA = _context.UserAccount.FirstOrDefault(u => u.UserAccountId == int.Parse(User.Identity.Name));
 
+                switch (UA.Role)
+                {
+                    case "Admin":
+                        return RedirectToAction("Index", "Employee");
+                    case "Laboratory Technician":
+                        return RedirectToAction("WelcomeLaboratory");
+                    case "Receptionist":
+                        return RedirectToAction("Index", "Patient");
+                    case "Doctor":
+                        return RedirectToAction("Index", "Home");
+                    case "Patient":
+                        return RedirectToAction("Index", "Home");
+                    default:
+                        break;
+                }
+
+            }
+           
             await HttpContext.Authentication.SignOutAsync(_externalCookieScheme);
             return View();
         }

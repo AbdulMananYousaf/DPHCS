@@ -1,0 +1,130 @@
+﻿@{ Layout = "~/Views/Shared/_AdminLayout.cshtml";}
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+@model IList<IdentityRole>
+
+
+
+<div class="col-md-9 " style="margin-top:3%">
+    <a href="@Url.Action("Create","Role")" class="btn btn-primary"> <i class="fa fa-plus"></i> Add new Role</a>
+            <table class="table col-md-offset-1" style="margin-top:2%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Role Id</th>
+                        <th>
+                            Role Name
+                        </th>
+                        <th>Users</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int No = 0;}
+                 @foreach (var item in Model)
+                 {
+                     No= No + 1;
+                    <tr>
+                        <td>@No</td>
+                        <td>
+                            @item.Id
+
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @ViewBag.countList[No-1]
+                            @{
+
+//var newuser = await userManger.GetUsersInRoleAsync(role.Name);
+//String countUsserInRole = newuser.Count().ToString();
+                             }
+                         
+
+                        </td>
+                        <td>
+                        
+                               @* <button data-Roleid="@item.Name" type="button" id="EditRole">Edit</button> |*@
+                                @*<input id="submitRole" type="submit" value="Create" class="btn btn-default" />*@
+                                <a href="ROle/Edit?id=@item.Id" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                            <a  data-RoleId="@item.Id" id="DeleteRole" href="#"  class="DeleteRole btn btn-danger" ><i class="glyphicon glyphicon-trash"></i> Delete </a>
+
+                           
+
+</td>
+
+</tr>
+                 }
+                       
+                    
+
+
+                </tbody>
+            </table>
+</div>
+
+@section Scripts{
+@* alertify Start *@
+<link href="~/lib/alertifyjs/css/alertify.css" rel="stylesheet" />
+<script src="~/lib/alertifyjs/alertify.js"></script>
+<link href="~/lib/alertifyjs/css/themes/bootstrap.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/css/themes/default.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/css/themes/semantic.css" rel="stylesheet" />
+@* alertify End *@
+    <script>
+        $(function () {
+            var deletebutton = "";
+            var errorHeader = '<span class="fa fa-trash fa-1x" '
+                + 'style="vertical-align:middle;color:#e10000;">'
+                + '</span>  <text id="themecolor"> Employee Delete</text>';
+            //DeleteRole Start
+            $(".DeleteRole").click(function () {
+                
+                    //alert(value);
+                deletebutton = $(this);
+                       
+                alertify.confirm("<text id='themecolor'>Are You Sure to Delete Role.</text>",
+                            function () {
+                                deletefun();
+                            }
+                        ).setHeader(errorHeader);
+            });
+            //DeleteRole End
+            function deletefun() {
+                RoleId = deletebutton.attr("data-RoleId");
+                alert(RoleId);
+                $.ajax({
+                    url: "Role/Delete?id=" + RoleId,
+                    method: "Post",
+                    beforeSend: function () {
+                        alert("before Send")
+                    },
+                    success: function (message) {
+                        deletebutton.parent().parent().fadeOut();
+                        alert(message);
+                    },
+                    error: function () {
+                        alert("Request Not Completed");
+
+                    },
+                    data: function (message) {
+
+                    }
+
+                });
+             }
+            });
+
+       
+    </script>
+}
+
+
+
+
+
+
+
+
+
+    

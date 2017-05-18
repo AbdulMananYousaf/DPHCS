@@ -1,0 +1,14 @@
+﻿@inject DistributedPatientHealthCareSystem.DPHCSModels.DPHCSContext _context
+
+@{var tempUser = _context.Person.FirstOrDefault(p => p.PersonId == int.Parse(User.Identity.Name)); }
+
+<li id="themecolor">
+    Welcome,
+    @{if (User.IsInRole("Admin"))
+        { <span>Admin</span>}
+        else
+        {
+            <span>@tempUser.FirstName</span>
+        }
+    }
+</li>

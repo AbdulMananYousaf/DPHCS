@@ -19,7 +19,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Dynamic;
 using DistributedPatientHealthCareSystem.Helper;
-
 namespace DistributedPatientHealthCareSystem.Controllers
 {
 

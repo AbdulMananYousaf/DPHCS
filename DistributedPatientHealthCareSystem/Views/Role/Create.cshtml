@@ -1,0 +1,94 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+    <div class="form-horizontal">
+        <h4>Role</h4>
+        <hr />
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Enter New Role</label>
+            <div class="col-md-4">
+                <input id="AddRole" class="form-control" />
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input id="submitRole" class="submitRole" type="button" value="Create"/>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@*@section Scripts{
+    <script>
+        $(function () {
+           
+            $(".submitRole").click(function () {
+                var newRole = $("#AddRole").val();
+                alert(newRole)
+                $.ajax({
+                    url: "Role/Create?id=" + newRole,
+                    method: "Post",
+                    beforeSend: function () {
+                        alert("before Send")
+                    },
+                    success: function (message) {
+                        alert(message);
+                    },
+                    error: function () {
+                        alert("Request Not Completed");
+
+                    },
+                    data: function (message) {
+
+                    }
+
+                });
+            });
+           
+        });
+    </script>
+}*@
+
+
+@section Scripts{
+    <script>
+
+        $(function () {
+            $("#submitRole").click(function () { 
+                var newRole = $("#AddRole").val();
+                alert(newRole);
+                $.ajax({
+                    url: '/Role/Create?name='+newRole,
+                    method: "Post",
+                    beforeSend: function () {
+                        alert("before Send")
+                    },
+                    success: function (message) {
+                        alert(message);
+                    },
+                    error: function () {
+                        alert("error");
+                    },
+                    data: function (message) {
+
+                    }
+
+                });
+            });
+        });
+    </script>
+}
+

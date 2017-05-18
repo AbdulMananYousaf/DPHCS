@@ -54,7 +54,14 @@
         <div class="form-group">
             <label asp-for="@Model.EmployeeNavigation.Gender" class="col-md-2 control-label"></label>
             <div class="col-md-4">
-                <input asp-for="@Model.EmployeeNavigation.Gender" class="form-control" />
+                @Html.DropDownList("EmployeeNavigation.Gender", new List<SelectListItem>{
+                    new SelectListItem{ Text="Male", Value="Male"},
+                    new SelectListItem{ Text="Female", Value="Female"},
+                    new SelectListItem{ Text="Other", Value="Other"}
+                    }, "--- Select Gender ---",
+                    new { @class = "form-control" }
+                    ) 
+               @* <input asp-for="@Model.EmployeeNavigation.Gender" class="form-control" />*@
                 <span asp-validation-for="@Model.EmployeeNavigation.Gender" class="text-danger"></span>
             </div>
         </div>
@@ -125,14 +132,84 @@
         <div class="form-group">
             <label asp-for="Spectialization" class="col-md-2 control-label"></label>
             <div class="col-md-4">
-                <input asp-for="Spectialization" class="form-control" />
+                <select class="form-control" id="Spectialization" name="Spectialization">
+                    <option selected="selected" value="">---- Select Spectialization ----</option>
+                    <option value="Allergy Specialist">Allergy Specialist</option>
+                    <option value="Anesthesiologist">Anesthesiologist</option>
+                    <option value="Anesthesia">Anesthesia</option>
+                    <option value="Audiologist">Audiologist</option>
+                    <option value="Breast Specialist">Breast Specialist</option>
+                    <option value="Cardiologist">Cardiologist</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Counselling Specialists">Counselling Specialists</option>
+                    <option value="clinical psychology">clinical psychology</option>
+                    <option value="Community Medicine consultant">Community Medicine consultant</option>
+                    <option value="Consultant Homeopathic Physician">Consultant Homeopathic Physician</option>
+                    <option value="Consultant Radiologist">Consultant Radiologist</option>
+                    <option value="Consultant Radiologist (FCPS)">Consultant Radiologist (FCPS)</option>
+                    <option value="Cardiologists">Cardiologists</option>
+                    <option value="Cardiac Surgeon">Cardiac Surgeon</option>
+                    <option value="Child Specialist">Child Specialist</option>
+                    <option value="Dental surgeon">Dental surgeon</option>
+                    <option value="Diabetes and Endocrine">Diabetes and Endocrine</option>
+                    <option value="Diabetologist">Diabetologist</option>
+                    <option value="Diabetologists">Diabetologists</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="Dentist">Dentist</option>
+                    <option value="Skin Specialists | Dermatologists">Skin Specialists | Dermatologists</option>
+                    <option value="Family physician and Sonologist">Family physician and Sonologist</option>
+                    <option value="FCPS Radiology">FCPS Radiology</option>
+                    <option value="Gastroenrologist/Hepatologist">Gastroenrologist/Hepatologist</option>
+                    <option value="Gastroenterology, Hepatology">Gastroenterology, Hepatology</option>
+                    <option value="General, Laparoscopic and Oncoplastic Surgeon">General, Laparoscopic and Oncoplastic Surgeon</option>
+                    <option value="General Medicine">General Medicine</option>
+                    <option value="General physician/ practitoner">General physician/ practitoner</option>
+                    <option value="General Physician">General Physician</option>
+                    <option value="General Practitioner">General Practitioner</option>
+                    <option value="General Surgeon">General Surgeon</option>
+                    <option value="Gastroenterology">Gastroenterology</option>
+                    <option value="Gynecologists">Gynecologists</option>
+                    <option value="HLT">Hematologist</option>
+                    <option value="Medical Specialist">Medical Specialist</option>
+                    <option value="Neurosurgeon">Neurosurgeon</option>
+                    <option value="ophthalmology-">ophthalmology</option>
+                    <option value="Ophthalmologist">Ophthalmologist</option>
+                    <option value="Orthopaedics">Orthopaedics </option>
+                    <option value="Orthopaedic-">Orthopaedic</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Oncologist">Oncologist </option>
+                    <option value="Paediatric Medicine">Paediatric Medicine</option>
+                    <option value="Paediatrician">Paediatrician</option>
+                    <option value="paediatrics">paediatrics</option>
+                    <option value="Surgeon">Surgeon</option>
+                    <option value="Pediatric Neurologist">Pediatric Neurologist</option>
+                    <option value="Pediatricians">Pediatricians</option>
+                </select>
                 <span asp-validation-for="Spectialization" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Status" class="col-md-2 control-label"></label>
             <div class="col-md-4">
-                <input asp-for="Status" class="form-control" />
+                @{ 
+                   
+
+                    SelectListItem sli = new SelectListItem();
+                    sli.Text = "Available";
+                    sli.Value = "Available";
+
+                    SelectListItem sli2 = new SelectListItem();
+                    sli2.Text = "Not Available";
+                    sli2.Value = "Not Available";
+
+
+
+                    IList<SelectListItem> ilistsli = new List<SelectListItem>();
+                    ilistsli.Add(sli);
+                    ilistsli.Add(sli2);
+                }
+                @Html.DropDownList("Status", ilistsli, "---Select Status---", new { @class = "form-control" })
+               
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
         </div>
@@ -144,10 +221,21 @@
     </div>
 </form>
 
-<div>
+<div >
     <a asp-action="Index">Back to List</a>
 </div>
 
+<div id="SpecilizationValue" class="hidden">@Model.Spectialization</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+        $(function () {
+            var Spectialization = $("#SpecilizationValue").html();
+            $("#Spectialization option:selected").text(Spectialization);
+          alert(SelectedSpeclization);
+							});
+
+    </script>
 }

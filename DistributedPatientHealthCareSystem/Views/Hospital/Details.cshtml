@@ -1,0 +1,49 @@
+@model DistributedPatientHealthCareSystem.DPHCSModels.Hospital
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hospital</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Api)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Api)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.WebSite)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WebSite)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.HospitalId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

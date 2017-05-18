@@ -67,7 +67,7 @@
             {
 
                 <ul class="nav navbar-top-links navbar-right">
-                    
+                    @{Html.RenderPartial("_LoginPartialWelcome");}
                    @if(User.IsInRole("Admin"))
                     {
                         <li>

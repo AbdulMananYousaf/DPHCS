@@ -177,7 +177,24 @@
           <div class="form-group">
               <label asp-for="Status" class="col-md-3 control-label"></label>
               <div class="col-md-9">
-                  <input asp-for="Status" class="form-control" />
+                  @{
+                 
+                      SelectListItem sli = new SelectListItem();
+                      sli.Text = "Available";
+                      sli.Value = "Available";
+
+                      SelectListItem sli2 = new SelectListItem();
+                      sli2.Text = "Not Available";
+                      sli2.Value = "Not Available";
+
+
+
+                      IList<SelectListItem> ilistsli = new List<SelectListItem>();
+                      ilistsli.Add(sli);
+                      ilistsli.Add(sli2);
+                  }
+                  @Html.DropDownList("Status", ilistsli, "---Select Status---", new { @class = "form-control" })
+
                   <span asp-validation-for="Status" class="text-danger"></span>
               </div>
           </div>

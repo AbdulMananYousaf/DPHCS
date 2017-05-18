@@ -6,18 +6,6 @@
     Layout = "_AdminLayout";
 }
 
-@if(User.IsInRole("Admin")){
-<h1>Tis is a Admin</h1>
-}
-@if(User.Identity.Name!=null){
-    <h1>User is Login and id is @ViewBag.Id</h1>
-}
-else{
-<h1>User is Not Login</h1>
-}
-
-
-
 <div class="row">
     <p>
         <a asp-action="Create">Create New</a>
@@ -32,6 +20,7 @@ else{
                 <table class="table table-responsive table-striped table-bordered table-hover" id="mytable" name="mytable">
                     <thead>
                         <tr>
+                         
                             <th>
                                 @Html.DisplayNameFor(model => model.EmployeeNavigation.PersonId)
                             </th>
@@ -60,9 +49,11 @@ else{
                         </tr>
                     </thead>
                     <tbody>
+                       
                         @foreach (var item in Model)
                         {
                             <tr>
+                               
                                 <td>
                                     @Html.DisplayFor(modelItem => item.EmployeeNavigation.PersonId)
                                 </td>
@@ -86,9 +77,9 @@ else{
                                     @Html.DisplayFor(modelItem => item.EmployeeNavigation.PersonNavigation.Role)
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
+                                    <a asp-action="Edit" asp-route-id="@item.EmployeeId" >Edit</a> |
                                     <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.EmployeeId" onclick="return confirm('Are you sure');">Delete</a>
+                                    <a  data-id=@item.EmployeeId  href="#"  >Delete</a>
                                 </td>
                             </tr>
                         }
@@ -100,9 +91,6 @@ else{
         </div>
     </div>
                
-
-
-
                 <link href="~/lib/theme/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" />
                 <link href="~/lib/theme/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -115,21 +103,83 @@ else{
                 <link href="~/lib/theme/dist/css/sb-admin-2.css" rel="stylesheet" />
 
                 <link href="~/lib/theme/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-                @section Scripts{
-                    <script src="~/lib/theme/vendor/metisMenu/metisMenu.min.js"></script>
-
-                    <script src="~/lib/theme/vendor/datatables/js/jquery.dataTables.min.js"></script>
-                    <script src="~/lib/theme/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-                    <script src="~/lib/theme/vendor/datatables-responsive/dataTables.responsive.js"></script>
-
-                    <script>
 
 
 
-                        $(function () {
+@section Scripts{
+<script src="~/lib/theme/vendor/metisMenu/metisMenu.min.js"></script>
+<script src="~/lib/theme/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="~/lib/theme/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="~/lib/theme/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
-                            $("#mytable").DataTable();
-                        });
+@* alertify Start *@
+<link href="~/lib/alertifyjs/css/alertify.css" rel="stylesheet" />
+<script src="~/lib/alertifyjs/alertify.js"></script>
+<link href="~/lib/alertifyjs/css/themes/bootstrap.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/css/themes/default.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/css/themes/semantic.css" rel="stylesheet" />
+@* alertify End *@
+<script>
 
-                    </script>
+    $(function () {       
+        var deletebutttonid = "";
+        var deletebutton = "";
+        var errorHeader = '<span class="fa fa-trash fa-1x" '
+            + 'style="vertical-align:middle;color:#e10000;">'
+            + '</span>  <text id="themecolor"> Employee Delete</text>';
+            $("a").on("click",
+                function () {
+                    deletebutton = $(this);
+                    var value = $(this).html();
+                    //alert(value);
+                    if (value =="Delete") {
+                        deletebutttonid = $(this).data("id");
+                        alertify.confirm("<text id='themecolor'>Are You Sure to Delete All Record of Employee.</text>",
+                            function () {
+                                deletefun();
+                            }
+                        ).setHeader(errorHeader);
+                    }
                 }
+            );
+            
+           
+            function deletefun() {               
+                $.ajax({
+                    beforeSend: function () {
+                                        
+                    },
+                    url: "/Employee/Delete?id=" + deletebutttonid,
+                    type: "POST",
+                    error: function () {
+                        alertify.error("Error:Somthing bad happen");
+                    },
+                    success: function (result) {
+                        if (result == "1") {
+                            
+                            alertify.success("Record Succesfully Deleted")
+                            deletebutton.parent().parent().fadeOut();
+
+                         }
+                        if(result=="0") { 
+                            alertify.error("Error:Somthing bad happen");
+                        } 
+                       
+                    },
+                    data: function (result) {
+                      
+                    },
+                    complete: function (result) {
+                      
+                    }
+
+                });
+              
+            }
+        
+        $("#mytable").DataTable();
+
+    });
+
+</script>
+}
