@@ -25,24 +25,25 @@ namespace ConsoleApp
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Appointment> Appointments { get; set; }
-        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<DoctorSpecializationList> DoctorSpecializationLists { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Hospital> Hospitals { get; set; }
-        public virtual DbSet<LabTestOrder> LabTestOrders { get; set; }
-        public virtual DbSet<LabTestResult> LabTestResults { get; set; }
-        public virtual DbSet<Patient> Patients { get; set; }
-        public virtual DbSet<PatientAllergie> PatientAllergies { get; set; }
-        public virtual DbSet<PatientHealthRecord> PatientHealthRecords { get; set; }
-        public virtual DbSet<PatientPrescription> PatientPrescriptions { get; set; }
-        public virtual DbSet<PatientVital> PatientVitals { get; set; }
-        public virtual DbSet<Person> People { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TestBloodGroup> TestBloodGroups { get; set; }
-        public virtual DbSet<UserAccount> UserAccounts { get; set; }
+        public virtual DbSet<Appointment> Appointment { get; set; }
+        public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<DoctorSpecializationList> DoctorSpecializationList { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<Hospital> Hospital { get; set; }
+        public virtual DbSet<LabTestOrder> LabTestOrder { get; set; }
+        public virtual DbSet<LabTestResult> LabTestResult { get; set; }
+        public virtual DbSet<Patient> Patient { get; set; }
+        public virtual DbSet<PatientAllergie> PatientAllergie { get; set; }
+        public virtual DbSet<PatientHealthRecord> PatientHealthRecord { get; set; }
+        public virtual DbSet<PatientPrescription> PatientPrescription { get; set; }
+        public virtual DbSet<PatientVital> PatientVital { get; set; }
+        public virtual DbSet<Person> Person { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TestBloodGroup> TestBloodGroup { get; set; }
+        public virtual DbSet<UserAccount> UserAccount { get; set; }
+        public virtual DbSet<UserConnection> UserConnection { get; set; }
     }
 }

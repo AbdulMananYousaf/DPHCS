@@ -17,7 +17,7 @@ namespace ConsoleApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LabTestOrder()
         {
-            this.LabTestResults = new HashSet<LabTestResult>();
+            this.LabTestResult = new HashSet<LabTestResult>();
         }
     
         public int LabTestOrderId { get; set; }
@@ -28,6 +28,6 @@ namespace ConsoleApp
     
         public virtual PatientHealthRecord PatientHealthRecord { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LabTestResult> LabTestResults { get; set; }
+        public virtual ICollection<LabTestResult> LabTestResult { get; set; }
     }
 }

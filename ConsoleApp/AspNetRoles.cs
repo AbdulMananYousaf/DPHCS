@@ -12,13 +12,13 @@ namespace ConsoleApp
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRole
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRole()
+        public AspNetRoles()
         {
-            this.AspNetRoleClaims = new HashSet<AspNetRoleClaim>();
-            this.AspNetUsers = new HashSet<AspNetUser>();
+            this.AspNetRoleClaims = new HashSet<AspNetRoleClaims>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
         public string Id { get; set; }
@@ -27,8 +27,8 @@ namespace ConsoleApp
         public string NormalizedName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetRoleClaim> AspNetRoleClaims { get; set; }
+        public virtual ICollection<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using DistributedPatientHealthCareSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DistributedPatientHealthCareSystem.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class RoleController : Controller
     {
         private RoleManager<IdentityRole> roleManager=null;
@@ -65,11 +67,11 @@ namespace DistributedPatientHealthCareSystem.Controllers
                 {
                     var role = new IdentityRole(name);
                     await roleManager.CreateAsync(role);
-                    return "Succesfully Added";
+                    return "1";
                 }
                 else
                 {
-                    return "Role Already Exist";
+                    return "0";
                 }
             }
             return "Try Again";
@@ -83,19 +85,23 @@ namespace DistributedPatientHealthCareSystem.Controllers
            
             if (role != null)
             {
+               var users=await userManger.GetUsersInRoleAsync(role.Name);
+                if (users.Count().ToString()!="0") {
+                    return "2";
+                } 
                 IdentityResult result = await roleManager.DeleteAsync(role);
                 if (result.Succeeded)
                 {
-                    return "Deleted";
+                    return "1";
                 }
                 else
                 {
-                    return "Not Deleted";
+                    return "0";
                 }
             }
             else
             {
-                return "Not Found";
+                return "0";
             }
 
         }

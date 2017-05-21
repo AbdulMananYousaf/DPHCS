@@ -30,54 +30,37 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-
-@*@section Scripts{
-    <script>
-        $(function () {
-           
-            $(".submitRole").click(function () {
-                var newRole = $("#AddRole").val();
-                alert(newRole)
-                $.ajax({
-                    url: "Role/Create?id=" + newRole,
-                    method: "Post",
-                    beforeSend: function () {
-                        alert("before Send")
-                    },
-                    success: function (message) {
-                        alert(message);
-                    },
-                    error: function () {
-                        alert("Request Not Completed");
-
-                    },
-                    data: function (message) {
-
-                    }
-
-                });
-            });
-           
-        });
-    </script>
-}*@
-
-
+@* alertify Start *@
+<link href="~/lib/alertifyjs/css/alertify.css" rel="stylesheet" />
+<script src="~/lib/alertifyjs/alertify.js"></script>
+<link href="~/lib/alertifyjs/css/themes/bootstrap.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/css/themes/default.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/css/themes/semantic.css" rel="stylesheet" />
+@* alertify End *@
 @section Scripts{
     <script>
 
         $(function () {
             $("#submitRole").click(function () { 
                 var newRole = $("#AddRole").val();
-                alert(newRole);
+                //alert(newRole);
                 $.ajax({
                     url: '/Role/Create?name='+newRole,
                     method: "Post",
                     beforeSend: function () {
-                        alert("before Send")
+                        //alert("before Send")
                     },
                     success: function (message) {
-                        alert(message);
+                        //$("#AddRole").reset();
+                        if (message == "1") { 
+                            alertify.success("Succesfully Added");
+                        }
+                        if (message == "0") { 
+                            alertify.error("Role Already Exist");
+                        }
+                       
+                       
+                        //alert(message);
                     },
                     error: function () {
                         alert("error");

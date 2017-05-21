@@ -5,7 +5,130 @@
     Layout = "_AdminLayout";
 }
 
-<h2>Details</h2>
+<style>
+    .panel-primary > .panel-heading {
+        background: #337AB7;
+    }
+</style>
+<div style="margin-top:2%">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Employee Detail</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img class="img-circle img-responsive"
+                             href=""
+                             src="data:image/jpeg;base64,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"
+                              alt="Employee Picture">
+                           @*  *@
+                        <div class="panel-footer" style="margin-top:5%">
+                          
+                            <span >
+                                @*<button class="btn btn-sm btn-warning" type="button"
+                                        data-toggle="tooltip"
+                                        data-original-title="Edit this user"style="margin-left:8%">
+                                    <i class="glyphicon glyphicon-edit"> Edit</i>
+                                </button>*@
+                                <a asp-action="Edit" asp-route-id="@Model.EmployeeId" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i> Edit </a>
+                              
+                                <a data-RoleId="@Model.EmployeeId" id="DeleteEmployee" href="#" class="DeleteEmployee btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+                            </span>
+                        </div>
+                        @*  *@
+                    </div>
+
+                    
+                    <div class="col-md-7">
+                        <strong></strong><br>
+                        <table class="table table-responsive">
+                            <caption id="themecolor"><b>Personal Detail</b></caption>
+                            <tbody>
+                                <tr></tr>
+                                <tr>
+                                    
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.PersonId)</td>
+                                    <td>@Model.EmployeeNavigation.PersonId </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.FirstName)</td>
+                                    <td>@Model.EmployeeNavigation.FirstName </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.LastName)</td>
+                                    <td>@Model.EmployeeNavigation.LastName </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.Gender)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.Email)</td>
+                                    <td>@Model.EmployeeNavigation.Email </td>
+
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.Address)</td>
+                                    <td>@Model.EmployeeNavigation.Address </td>
+
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.Cnic)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.Mobile)</td>
+                                    <td>@Model.EmployeeNavigation.Mobile </td>
+
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.EmployeeNavigation.Age)</td>
+                                    <td>@Model.EmployeeNavigation.Age </td>
+
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                        <table class="table table-responsive">
+                            <caption id="themecolor"><b>Professional Detail</b></caption>
+                            <tbody>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.JoinDate)</td>
+                                    <td>@Model.JoinDate </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Spectialization)</td>
+                                    <td>@Model.Spectialization </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Salary)</td>
+                                    <td>@Model.Salary </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Status)</td>
+                                    <td>@Model.Status </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+   
+</div>
+
+
+<div class="clearfix"></div>
+
+
+
 
 <div>
     <h4>Employee</h4>
@@ -66,3 +189,59 @@
     <a asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+@* alertify Start *@
+<link href="~/lib/alertifyjs/css/alertify.css" rel="stylesheet" />
+<script src="~/lib/alertifyjs/alertify.js"></script>
+<link href="~/lib/alertifyjs/css/themes/bootstrap.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/css/themes/default.css" rel="stylesheet" />
+<link href="~/lib/alertifyjs/css/themes/semantic.css" rel="stylesheet" />
+@* alertify End *@
+@section Scripts{
+    <script>
+        $(function () {
+            var deletebutton = "";
+            var errorHeader = '<span class="fa fa-trash fa-1x" '
+                + 'style="vertical-align:middle;color:#e10000;">'
+                + '</span>  <text id="themecolor">Confirm Employee Delete!</text>';
+            //DeleteRole Start
+            $(".DeleteEmployee").click(function () {
+                
+              
+                deletebutton = $(this);
+
+                alertify.confirm("<text id='themecolor'>Are You Sure to Delete Employee.</text>",
+                    function () {
+                        deletefun();
+                    }
+                ).setHeader(errorHeader);
+            
+
+            });
+            //DeleteRole End
+            function deletefun() {
+                RoleId = deletebutton.attr("data-RoleId");
+                //alert(RoleId);
+                $.ajax({
+                    url: "/Employee/Delete?id=" + RoleId,
+                    method: "Post",
+                    beforeSend: function () {
+                        //alert("before Send")
+                    },
+                    success: function (message) {
+                        alertify.success("Successfully Deleted");
+                        window.location.replace("/Employee/Index");
+                        //alert(message);
+                    },
+                    error: function () {
+                        alert("Error:Request Not Completed");
+
+                    },
+                    data: function (message) {
+
+                    }
+
+                });
+            }
+        });
+    </script>
+}

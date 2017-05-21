@@ -10,20 +10,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using DistributedPatientHealthCareSystem.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DistributedPatientHealthCareSystem.Controllers
 {
     [Authorize(Roles ="Admin")]
     public class EmployeeController : Controller
     {
-        private readonly DPHCSContext _context;
+        private readonly DPHCSContext _context=null;
+        private RoleManager<IdentityRole> roleManager=null;
+        private UserManager<ApplicationUser> _userManager=null;
 
-        private UserManager<ApplicationUser> _userManager;
-
-        public EmployeeController(DPHCSContext context, UserManager<ApplicationUser> userManager)
+        public EmployeeController(DPHCSContext context, UserManager<ApplicationUser> userManager,RoleManager<IdentityRole> _roleManager)
         {
-           
-            _context = context;
+            roleManager = _roleManager;
+             _context = context;
             _userManager = userManager;
         }
 
@@ -31,10 +32,12 @@ namespace DistributedPatientHealthCareSystem.Controllers
         // GET: Employee
         public async Task<IActionResult> Index()
         {
+           
             
             ViewBag.Id= User.Identity.Name;
-            var dPHCSContext = _context.Employee.Include(e => e.EmployeeNavigation).Include(u=>u.EmployeeNavigation.PersonNavigation);
+            var dPHCSContext = _context.Employee.Include(e => e.EmployeeNavigation).Include(u => u.EmployeeNavigation.PersonNavigation);
             IList<Employee> ILE = await dPHCSContext.ToListAsync();
+            //var dPHCSContext = _context.Employee.Where(a=>a.JoinDate=="0000");
             return View(await dPHCSContext.ToListAsync());
         }
 
@@ -63,13 +66,14 @@ namespace DistributedPatientHealthCareSystem.Controllers
         // GET: Employee/Create
         public IActionResult Create()
         {
+            IList<IdentityRole> RoleList = roleManager.Roles.ToList();
+         
+            ViewData["RoleId"] = new SelectList(RoleList, "Name", "Name");
             ViewData["EmployeeId"] = new SelectList(_context.Person, "PersonId", "PersonId");
             return View();
         }
 
         // POST: Employee/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("JoinDate,Salary,Spectialization,Status,EmployeeNavigation")] Employee employee)
@@ -154,7 +158,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
             }
             else
             {
-                //ViewData["EmployeeId"] = new SelectList(_context.Person, "PersonId", "Address", employee.EmployeeId);
+               
                 return View(employee);
             }
 
@@ -186,17 +190,12 @@ namespace DistributedPatientHealthCareSystem.Controllers
             {
                 return View();
             }
-            //if (employee == null)
-            //{
-            //    return NotFound();
-            //}
-            //ViewData["EmployeeId"] = new SelectList(_context.Person, "PersonId", "Address", employee.EmployeeId);
+           
            
         }
 
         // POST: Employee/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,JoinDate,Salary,Spectialization,Status,EmployeeNavigation")] Employee employee)
@@ -309,104 +308,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
             {
                 return "0";
             }
-
-
-          
-            //return RedirectToAction("Index");
         }
-
-
-
-
-
-
-
-
-
-
-
-        //// GET: Employee/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    ViewBag.Role = HttpContext.Session.GetString("Role");
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var employee = await _context.Employee
-        //        .Include(e => e.EmployeeNavigation)
-        //        .SingleOrDefaultAsync(m => m.EmployeeId == id);
-        //    if (employee == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(employee);
-        //}
-
-        //// POST: Employee/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-
-        //{
-        //    ////Deletion for oidentity tables s
-        //    //var user = await _userManager.FindByIdAsync(id.ToString());
-
-        //    IdentityResult rc = new IdentityResult();
-
-        //    if ((_userManager != null))
-        //    {
-        //        var user = await _userManager.FindByNameAsync(id.ToString());
-        //        var logins = user.Logins;
-        //        var rolesForUser = await _userManager.GetRolesAsync(user);
-
-        //        using (var transaction = _context.Database.BeginTransaction())
-        //        {
-        //            foreach (var login in logins.ToList())
-        //            {
-        //                await _userManager.RemoveLoginAsync(user, login.LoginProvider, login.ProviderKey);
-        //            }
-
-        //            if (rolesForUser.Count() > 0)
-        //            {
-        //                foreach (var item in rolesForUser.ToList())
-        //                {
-        //                    // item should be the name of the role
-        //                    var result = await _userManager.RemoveFromRoleAsync(user, item);
-        //                }
-        //            }
-        //            rc = await _userManager.DeleteAsync(user);
-        //            transaction.Commit();
-        //        }
-        //    }
-        //    /////End Identity Deletion
-
-
-
-        //    var employee = await _context.Employee.SingleOrDefaultAsync(m => m.EmployeeId == id);
-        //    Person person = await _context.Person.FirstOrDefaultAsync(p => p.PersonId == employee.EmployeeId);
-        //    UserAccount UA = await _context.UserAccount.FirstOrDefaultAsync(u => u.UserAccountId == person.PersonId);
-
-        //    _context.Employee.Remove(employee);
-        //    _context.Person.Remove(person);
-        //    _context.UserAccount.Remove(UA);
-
-        //    _context.SaveChanges();
-        //    if (employee.EmployeeNavigation.PersonNavigation.Role == "Doctor")
-        //    {
-        //       var employeeResult =_context.Employee.Where(e => e.Spectialization == employee.Spectialization);
-        //        if (employeeResult.Count() == 0) {
-        //           var SpecializationListResult= _context.DoctorSpecializationList.FirstOrDefault(s => s.Text == employee.Spectialization);
-
-        //            _context.DoctorSpecializationList.Remove(SpecializationListResult);
-        //            _context.SaveChanges();
-
-        //        }
-        //    }
-        //    return RedirectToAction("Index");
-        //}
 
         private bool EmployeeExists(int id)
         {

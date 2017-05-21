@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DistributedPatientHealthCareSystem.DPHCSModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DistributedPatientHealthCareSystem.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class HospitalController : Controller
     {
         private readonly DPHCSContext _context;

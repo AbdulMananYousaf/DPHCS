@@ -1,12 +1,12 @@
 ﻿@{ Layout = "~/Views/Shared/_AdminLayout.cshtml";}
-@using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 @model IList<IdentityRole>
 
 
 
 <div class="col-md-9 " style="margin-top:3%">
-    <a href="@Url.Action("Create","Role")" class="btn btn-primary"> <i class="fa fa-plus"></i> Add new Role</a>
-            <table class="table col-md-offset-1" style="margin-top:2%">
+    <a href="@Url.Action("Create","Role")" class="btn btn-primary btn-sm"> <i class="fa fa-plus"></i> Add new Role</a>
+            <table class="table col-md-offset-1 panel panel-primary panel-body" style="margin:2%;">
+               <caption class="label-primary"style="color:white;text-align:center">User Roles</caption>
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -46,8 +46,8 @@
                         
                                @* <button data-Roleid="@item.Name" type="button" id="EditRole">Edit</button> |*@
                                 @*<input id="submitRole" type="submit" value="Create" class="btn btn-default" />*@
-                                <a href="ROle/Edit?id=@item.Id" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                            <a  data-RoleId="@item.Id" id="DeleteRole" href="#"  class="DeleteRole btn btn-danger" ><i class="glyphicon glyphicon-trash"></i> Delete </a>
+                                <a href="ROle/Edit?id=@item.Id" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                            <a  data-RoleId="@item.Id" id="DeleteRole" href="#"  class="DeleteRole btn btn-danger btn-sm" ><i class="glyphicon glyphicon-trash"></i> Delete </a>
 
                            
 
@@ -92,16 +92,29 @@
             //DeleteRole End
             function deletefun() {
                 RoleId = deletebutton.attr("data-RoleId");
-                alert(RoleId);
+                //alert(RoleId);
                 $.ajax({
                     url: "Role/Delete?id=" + RoleId,
                     method: "Post",
                     beforeSend: function () {
-                        alert("before Send")
+                        //alert("before Send")
                     },
                     success: function (message) {
-                        deletebutton.parent().parent().fadeOut();
-                        alert(message);
+                        if (message == "2") { 
+                            
+                            alertify.error("Error! User Exist with Role");
+                        }
+                        if (message == 1){
+                            deletebutton.parent().parent().fadeOut();
+
+                            alertify.success("Role Successfully Deleted");
+
+                        }
+                        if (message == 0) {
+                            alertify.error("Error!Request Not Completed");
+                        }
+                       
+                        //alert(message);
                     },
                     error: function () {
                         alert("Request Not Completed");

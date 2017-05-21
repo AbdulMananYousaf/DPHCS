@@ -17,7 +17,7 @@ namespace ConsoleApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hospital()
         {
-            this.PatientHealthRecords = new HashSet<PatientHealthRecord>();
+            this.PatientHealthRecord = new HashSet<PatientHealthRecord>();
         }
     
         public int HospitalId { get; set; }
@@ -28,6 +28,6 @@ namespace ConsoleApp
         public string WebSite { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientHealthRecord> PatientHealthRecords { get; set; }
+        public virtual ICollection<PatientHealthRecord> PatientHealthRecord { get; set; }
     }
 }

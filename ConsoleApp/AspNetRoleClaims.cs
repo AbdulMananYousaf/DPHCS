@@ -12,13 +12,13 @@ namespace ConsoleApp
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoleClaim
+    public partial class AspNetRoleClaims
     {
         public int Id { get; set; }
         public string ClaimType { get; set; }
         public string ClaimValue { get; set; }
         public string RoleId { get; set; }
     
-        public virtual AspNetRole AspNetRole { get; set; }
+        public virtual AspNetRoles AspNetRoles { get; set; }
     }
 }

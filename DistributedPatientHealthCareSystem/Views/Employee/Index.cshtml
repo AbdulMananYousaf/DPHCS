@@ -5,11 +5,17 @@
     ViewData["Title"] = "Index";
     Layout = "_AdminLayout";
 }
+<style>
+    th, td {
+        color: #23527C;
+    }
+</style>
+<p style="margin:2%">
+    <a href="@Url.Action("Create","Employee")" class="btn btn-primary btn-sm"> <i class="fa fa-plus"></i> Add Employee</a>
 
-<div class="row">
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+</p>
+<div class="row" style="margin:2%">
+    
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -34,19 +40,18 @@
                                 @Html.DisplayNameFor(model => model.EmployeeNavigation.Gender)
                             </th>
 
-
                             <th>
                                 @Html.DisplayNameFor(model => model.Spectialization)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Status)
-                            </th>
+                           
                             <th>
                                 @Html.DisplayNameFor(model => model.EmployeeNavigation.PersonNavigation.Role)
                             </th>
-
                             <th></th>
                         </tr>
+                     
+                           
+                      
                     </thead>
                     <tbody>
                        
@@ -71,17 +76,24 @@
                                     @Html.DisplayFor(modelItem => item.Spectialization)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
-                                </td>
-                                <td>
                                     @Html.DisplayFor(modelItem => item.EmployeeNavigation.PersonNavigation.Role)
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.EmployeeId" >Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
-                                    <a  data-id=@item.EmployeeId  href="#"  >Delete</a>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary btn-sm" asp-action="Edit"  asp-route-id="@item.EmployeeId"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                                        <a class="btn btn-info btn-sm" asp-action="Details"   asp-route-id="@item.EmployeeId"><i class="glyphicon glyphicon-info-sign"></i> Details</a>
+                                        <a href="#" class="DeleteEmployee btn btn-danger btn-sm" data-RoleId="@item.EmployeeId" id="DeleteRole"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+                                        
+                                       @* <a  class="btn-danger btn-sm DeleteRolebtn"  data-RoleId="@item.EmployeeId" id="DeleteRole" ><i class="glyphicon glyphicon-trash"></i> Delete </a>*@
+
+                                        </div>
+                                   
+
                                 </td>
+                                
+                               
                             </tr>
+                           
                         }
                     </tbody>
                 </table>
@@ -121,65 +133,56 @@
 @* alertify End *@
 <script>
 
-    $(function () {       
-        var deletebutttonid = "";
+    $(function () {
+       
         var deletebutton = "";
         var errorHeader = '<span class="fa fa-trash fa-1x" '
             + 'style="vertical-align:middle;color:#e10000;">'
-            + '</span>  <text id="themecolor"> Employee Delete</text>';
-            $("a").on("click",
+            + '</span>  <text id="themecolor">Confirm Employee Delete!</text>';
+        //DeleteRole Start
+        $(".DeleteEmployee").click(function () {
+            //alert("jQuery Working");
+            //alert(value);
+            deletebutton = $(this);
+
+            alertify.confirm("<text id='themecolor'>Are You Sure to Delete Employee.</text>",
                 function () {
-                    deletebutton = $(this);
-                    var value = $(this).html();
-                    //alert(value);
-                    if (value =="Delete") {
-                        deletebutttonid = $(this).data("id");
-                        alertify.confirm("<text id='themecolor'>Are You Sure to Delete All Record of Employee.</text>",
-                            function () {
-                                deletefun();
-                            }
-                        ).setHeader(errorHeader);
-                    }
+                    deletefun();
                 }
-            );
-            
-           
-            function deletefun() {               
-                $.ajax({
-                    beforeSend: function () {
-                                        
-                    },
-                    url: "/Employee/Delete?id=" + deletebutttonid,
-                    type: "POST",
-                    error: function () {
-                        alertify.error("Error:Somthing bad happen");
-                    },
-                    success: function (result) {
-                        if (result == "1") {
-                            
-                            alertify.success("Record Succesfully Deleted")
-                            deletebutton.parent().parent().fadeOut();
+            ).setHeader(errorHeader);
+        });
+        //DeleteRole End
+        function deletefun() {
+            RoleId = deletebutton.attr("data-RoleId");
+            //alert(RoleId);
+            $.ajax({
+                url: "/Employee/Delete?id=" + RoleId,
+                method: "Post",
+                beforeSend: function () {
+                    //alert("before Send")
+                },
+                success: function (message) {
+                    deletebutton.parent().parent().parent().fadeOut();
+                    alertify.success("Successfully Deleted");
+                    //alert(message);
+                },
+                error: function () {
+                    alert("Error:Request Not Completed");
 
-                         }
-                        if(result=="0") { 
-                            alertify.error("Error:Somthing bad happen");
-                        } 
-                       
-                    },
-                    data: function (result) {
-                      
-                    },
-                    complete: function (result) {
-                      
-                    }
+                },
+                data: function (message) {
 
-                });
-              
-            }
-        
-        $("#mytable").DataTable();
+                }
 
+            });
+        }
     });
+    $("#mytable").DataTable({
 
+        "oLanguage": {
+            "sEmptyTable": "<span class='col-md-offset-5' id='themecolor' style='font-weight:bolder; font-size:16px; text-align: center;'>No record found</span>"
+        }
+
+    } );
 </script>
 }

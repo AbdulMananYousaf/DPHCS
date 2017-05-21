@@ -80,33 +80,40 @@ namespace DistributedPatientHealthCareSystem.Controllers
             String a=User.Identity.Name;
             
             var user = await _userManager.FindByIdAsync(model.UserAccountId.ToString());
-         
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, lockoutOnFailure: false);
-            if (result.Succeeded)
-            {
-                var UA =_context.UserAccount.FirstOrDefault(u => u.UserAccountId == model.UserAccountId);
-              
-                switch (UA.Role)
-                {
-                    case "Admin":
-                        return RedirectToAction("Index", "Employee");
-                    case "Laboratory Technician":
-                        return RedirectToAction("WelcomeLaboratory");
-                    case "Receptionist":
-                        return RedirectToAction("Index","Patient");
-                    case "Doctor":
-                        return RedirectToAction("Index", "Home");
-                    case "Patient":
-                        return RedirectToAction("Index", "Home");
-                    default:
-                        break;
-                }
-
+            if (user==null) {
+                ModelState.AddModelError("", "Username or password is wrongbbb.");
+                return View();
             }
             else
             {
-                ModelState.AddModelError("", "Username or password is wrong.");
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    var UA = _context.UserAccount.FirstOrDefault(u => u.UserAccountId == model.UserAccountId);
+                   
+                    switch (UA.Role)
+                    {
+                        case "Admin":
+                            return RedirectToAction("Index", "Employee");
+                        case "Laboratory Technician":
+                            return RedirectToAction("WelcomeLaboratory");
+                        case "Receptionist":
+                            return RedirectToAction("Index", "Patient");
+                        case "Doctor":
+                            return RedirectToAction("Index", "Home");
+                        case "Patient":
+                            return RedirectToAction("Index", "Home");
+                        default:
+                            break;
+                    }
+
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Username or password is wrong.");
+                }
             }
+           
             return View(model);
         }
 

@@ -54,16 +54,16 @@
     <Compile Include="Appointment.cs">
       <DependentUpon>DPHCSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AspNetRole.cs">
+    <Compile Include="AspNetRoleClaims.cs">
       <DependentUpon>DPHCSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AspNetRoleClaim.cs">
+    <Compile Include="AspNetRoles.cs">
       <DependentUpon>DPHCSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AspNetUser.cs">
+    <Compile Include="AspNetUserClaims.cs">
       <DependentUpon>DPHCSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AspNetUserClaim.cs">
+    <Compile Include="AspNetUsers.cs">
       <DependentUpon>DPHCSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DoctorSpecializationList.cs">
@@ -116,13 +116,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sysdiagram.cs">
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>DPHCSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TestBloodGroup.cs">
       <DependentUpon>DPHCSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserAccount.cs">
+      <DependentUpon>DPHCSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserConnection.cs">
       <DependentUpon>DPHCSModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -5,14 +5,15 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<p style="margin-top:3%">
+    <a href="@Url.Action("Create","Hospital")" class="btn btn-sm btn-primary"> <i class="fa fa-plus"></i> Add Branch</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="panel panel-body panel-primary">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.HospitalId)</th>
                 <th>
                     @Html.DisplayNameFor(model => model.Address)
                 </th>
@@ -28,33 +29,44 @@
                 <th>
                     @Html.DisplayNameFor(model => model.WebSite)
                 </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Api)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WebSite)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.HospitalId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.HospitalId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.HospitalId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HospitalId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Api)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WebSite)
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.HospitalId">Edit</a>
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.HospitalId">Details</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.HospitalId">Delete</a>
+                        </div>
+
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

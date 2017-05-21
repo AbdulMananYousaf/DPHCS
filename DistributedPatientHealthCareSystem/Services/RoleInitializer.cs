@@ -35,6 +35,8 @@ namespace DistributedPatientHealthCareSystem.Services
                 var role = new IdentityRole("Patient");
                 await roleManager.CreateAsync(role);
             }
+
+
         }
     }
 }

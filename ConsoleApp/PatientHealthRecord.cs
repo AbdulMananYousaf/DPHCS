@@ -17,12 +17,12 @@ namespace ConsoleApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PatientHealthRecord()
         {
-            this.LabTestOrders = new HashSet<LabTestOrder>();
-            this.LabTestResults = new HashSet<LabTestResult>();
-            this.PatientAllergies = new HashSet<PatientAllergie>();
-            this.TestBloodGroups = new HashSet<TestBloodGroup>();
-            this.PatientPrescriptions = new HashSet<PatientPrescription>();
-            this.PatientVitals = new HashSet<PatientVital>();
+            this.LabTestOrder = new HashSet<LabTestOrder>();
+            this.LabTestResult = new HashSet<LabTestResult>();
+            this.PatientAllergie = new HashSet<PatientAllergie>();
+            this.TestBloodGroup = new HashSet<TestBloodGroup>();
+            this.PatientPrescription = new HashSet<PatientPrescription>();
+            this.PatientVital = new HashSet<PatientVital>();
         }
     
         public int HealthRecordId { get; set; }
@@ -33,17 +33,17 @@ namespace ConsoleApp
         public virtual Employee Employee { get; set; }
         public virtual Hospital Hospital { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LabTestOrder> LabTestOrders { get; set; }
+        public virtual ICollection<LabTestOrder> LabTestOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LabTestResult> LabTestResults { get; set; }
+        public virtual ICollection<LabTestResult> LabTestResult { get; set; }
         public virtual Patient Patient { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientAllergie> PatientAllergies { get; set; }
+        public virtual ICollection<PatientAllergie> PatientAllergie { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TestBloodGroup> TestBloodGroups { get; set; }
+        public virtual ICollection<TestBloodGroup> TestBloodGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientPrescription> PatientPrescriptions { get; set; }
+        public virtual ICollection<PatientPrescription> PatientPrescription { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientVital> PatientVitals { get; set; }
+        public virtual ICollection<PatientVital> PatientVital { get; set; }
     }
 }

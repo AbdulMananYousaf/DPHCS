@@ -17,17 +17,17 @@ namespace ConsoleApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
-            this.Appointments = new HashSet<Appointment>();
-            this.PatientHealthRecords = new HashSet<PatientHealthRecord>();
+            this.Appointment = new HashSet<Appointment>();
+            this.PatientHealthRecord = new HashSet<PatientHealthRecord>();
         }
     
         public int PatientId { get; set; }
         public string RegDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<Appointment> Appointment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientHealthRecord> PatientHealthRecords { get; set; }
+        public virtual ICollection<PatientHealthRecord> PatientHealthRecord { get; set; }
         public virtual Person Person { get; set; }
     }
 }
