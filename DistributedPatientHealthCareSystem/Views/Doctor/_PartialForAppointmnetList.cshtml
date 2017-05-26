@@ -10,33 +10,38 @@
         <thead>
             <tr>
                 <th>No.</th>
+               
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient.PatientNavigation.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient.PatientNavigation.LastName)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.AppointmentStatus)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Discription)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.HeldDate)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.SetedDate)
-                </th>
+                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.VisitReson)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.PatientLastVisitDate)
-                </th>
-                <th>
+                </th>*@
+                @*<th>
                     @Html.DisplayNameFor(model => model.DoctorEmployee)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Patient)
-                </th>
-                <th>
+                </th>*@
+            
+                @*<th>
                     @Html.DisplayNameFor(model => model.ReceptionistEmployeet)
-                </th>
+                </th>*@
                 <th></th>
             </tr>
         </thead>
@@ -53,37 +58,45 @@
                     <tr id="addr0">
                         <td>@count</td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Patient.PatientNavigation.FirstName)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Patient.PatientNavigation.LastName)
+
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.AppointmentStatus)
                         
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Discription)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.HeldDate)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.SetedDate)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.VisitReson)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.PatientLastVisitDate)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.DoctorEmployee.JoinDate)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Patient.RegDate)
-                        </td>
-                        <td>
+                       
+
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.ReceptionistEmployeet.JoinDate)
-                        </td>
+                        </td>*@
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
+                            @*<a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a> |*@
+                            <a asp-controller="HealthRecord" asp-action="Index" asp-route-id="@item.Patient.PatientNavigation.PersonId">Health Record</a>
                         </td>
                     </tr>
 

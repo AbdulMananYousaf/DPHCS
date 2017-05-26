@@ -4,45 +4,92 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@{int PatientId = ViewBag.PatientId;}
+<div>PatientID:@ViewBag.PatientId</div>
+<p style="margin:2%">
+    <a href="@Url.Action("Create")?id=@PatientId" class="btn btn-primary btn-sm"> <i class="fa fa-plus"></i> Add HealthRecord</a>
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" style="margin:2%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DoctorEmployee)
+                @Html.DisplayNameFor(model => model.HealthRecordId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hospital)
+                @Html.DisplayNameFor(model => model.DoctorEmployeeId)
             </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.HospitalId)
+            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Patient)
+                @Html.DisplayNameFor(model => model.PatientId)
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody  id="delrecord">
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DoctorEmployee.JoinDate)
+                @Html.DisplayFor(modelItem => item.HealthRecordId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Hospital.Address)
+                @Html.DisplayFor(modelItem => item.DoctorEmployeeId)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.HospitalId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Patient.RegDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.HealthRecordId">Edit</a> |
+                @*<a asp-action="Edit" asp-route-id="@item.HealthRecordId">Edit</a> |*@
                 <a asp-action="Details" asp-route-id="@item.HealthRecordId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.HealthRecordId">Delete</a>
+                @*<a href='javascript:deleteHealthRecord(this)' data-id=@item.HealthRecordId>Delete</a>*@
+                <a href='#' onclick="deleteHealthRecord(@item.HealthRecordId);">Delete</a>
+                
             </td>
         </tr>
 }
     </tbody>
 </table>
+@section Scripts{
+    <script>
+        var deleteHealthRecord = function (presid) {
+            //var presid = $(obj).val();
+            //$("ul").find("[data-slide='" + current + "']");
+           
+            alert(presid);
+            //var presid = $("#delrecord").attr('data-id');
+            $.ajax({
+                beforeSend: function () {
+
+                    alert(presid);
+                },
+                url: "/HealthRecord/Delete?id=" + presid + "&tablename=HealthRecord",
+                type: "POST",
+                error: function () {
+                    alert("del err");
+                },
+                success: function (result) {
+                    if (result == "1") {
+                        alert("del");
+                    }
+                    if (result == "0") {
+                        alert("0");
+                    }
+
+                },
+                data: function (result) {
+
+                },
+                complete: function (result) {
+
+                }
+
+            });
+           
+        }
+    </script>
+}

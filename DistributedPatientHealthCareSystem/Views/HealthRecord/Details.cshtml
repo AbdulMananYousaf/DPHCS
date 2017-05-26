@@ -1,37 +1,310 @@
 @model DistributedPatientHealthCareSystem.DPHCSModels.PatientHealthRecord
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    //Layout =null;
 }
+@{int PatientId = ViewBag.PatientId;}
+<div>PatientID:@ViewBag.PatientId</div>
+<div>HealthRecordId:@ViewBag.HealthRecordId</div>
+<div id="Exception"></div>
+<style>
+    .panel-body {
+        word-break: break-all;
+        background-color: white
+    }
 
-<h2>Details</h2>
+</style>
+<a href='javascript:editPrecreption();'>fvd</a>
+<div class="col-md-3">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Prescription</div>
+        <div class="panel-body">
+         
+            <div id="OutputPrescreption">
+                
+                @foreach (var item in Model.PatientPrescription)
+                {
+                    <div data-preid= @item.PrescriptionId  style="background-color:#D9EDF7;margin-bottom:10%;padding:5%">
+                        <div>
+                            <b>Name:</b>  @item.MedicineName  
+                            <a href="#" data-presId=' + @item.PrescriptionId + ' onClick="editPrecreption(this)" class="fa fa-edit pull-right btn btn-warning btn-xs"></a>
+                        </div>
+                        <div> <b>Quantity:</b> @item.Quantity</div>
+                        <div>@item.UsageDirections</div>
+                    </div>
+                }
+               
+                @*<div style="background-color:#D9EDF7;margin-bottom:10%;padding:5%">
+                  
+                    <div>
+                        <b>Name:</b>MedicianNmae <div class="fa fa-edit pull-right btn btn-warning btn-xs"></div>
+                    </div>
+                    <div>
+                        <b>Quantity:</b> 3
+                    </div>
+                    <div>
+                        use with water and tea
+                    </div>
+                </div>*@
 
-<div>
-    <h4>PatientHealthRecord</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DoctorEmployee)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DoctorEmployee.JoinDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Hospital)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Hospital.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.RegDate)
-        </dd>
-    </dl>
+            </div>
+            <div style="margin-left:3%;margin-bottom:3%">
+                <a id="addPrescreption" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add</a>
+            </div>
+            <div id="InputPrescreption" class="panel panel-body panel-info" hidden>
+                <form action="#" id="formPrescription">
+                    <div hidden>
+                        <input id="PrescriptionId" name="PrescriptionId" type="text" class="form-control form-group" />
+                    </div>
+                    <div hidden>
+                        <input name="PatientHealthRecordId" type="text" class="form-control form-group" />
+                    </div>
+                    <div class="form-group">
+                        <a href="javascript:backPrescreption()"><i class="glyphicon glyphicon-arrow-left btn btn-default btn-xs pull-left"></i></a> 
+                       @* <i class="glyphicon glyphicon-arrow-left btn btn-default btn-xs pull-left"></i>*@
+                        &nbsp;&nbsp;<b id="themecolor">Drug</b>
+                       <a href="javascript:savePrescreption()"><i class="fa fa-check btn btn-success btn-xs pull-right"></i></a> 
+                      @* <button id="PrescreptionSave" type="submit" class="fa fa-check btn btn-success btn-xs pull-right"></button>*@
+                        <a href="javascript:deletePrescreption()"><i class="fa fa-trash btn btn-danger btn-xs  pull-right"></i></a>
+                       
+                       
+                      
+                    </div>
+                    <div>
+                        <input name="MedicineName" type="text" class="form-control form-group" placeholder="Medician Name"/>
+                    </div>
+                    <div>
+                        <input name="Quantity" type="text" class="form-control form-group" placeholder="Quantity" />
+                    </div>
+                    <textarea name="UsageDirections" maxlength="50" style="resize: vertical; height:70px;" class="form-control" placeholder="Usage Direction"></textarea>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.HealthRecordId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    <script>
+     
+        var PHR = {
+            "HealthRecordId": @ViewBag.HealthRecordId,
+            "DoctorEmployeeId": @User.Identity.Name,
+            "HospitalId": 1,
+            "PatientId": @ViewBag.PatientId,
+            "LabTestOrder": [],
+            "LabTestResult": [],
+            "PatientAllergie": [],
+            "PatientPrescription": [],
+            "PatientVital": [],
+            "TestBloodGroup": [],
+            "DoctorEmployee": null,
+            "Hospital": null,
+            "Patient": null
+        };
+        PHR.DoctorEmployeeId =@User.Identity.Name
+           
+            //#region Start General Functions
+        $.fn.serializeFormJSON = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+        function populate(frm, data) {
+            $.each(data, function (key, value) {
+                var ctrl = $('[name=' + key + ']', frm);
+                switch (ctrl.prop("type")) {
+                    case "radio": case "checkbox":
+                        ctrl.each(function () {
+                            if ($(this).attr('value') == value) $(this).attr("checked", value);
+                        });
+                        break;
+                    default:
+                        ctrl.val(value);
+                }
+            });
+        }
+         // #endregion End General Functions 
+
+        
+ //Start Prescreption
+        
+        var CountPrescription=0;
+        var savePrescreption = function () {
+           
+            $('#InputPrescreption').attr("hidden", "true");
+            $('#addPrescreption').show();
+            var formthis = $('#formPrescription');
+            //PHR.PatientPrescription[CountPrescription] = formthis.serializeFormJSON();
+            PHR.PatientPrescription[CountPrescription] = formthis.serializeFormJSON();
+            //populate('#formPrescription', PHR.PatientPrescription[CountPrescription]);
+            var jsondata = JSON.stringify(formthis.serializeFormJSON());
+          
+            //PHR.PatientPrescription.push(formthis.serializeFormJSON());
+            $.ajax({
+                beforeSend: function () {
+                   
+                },
+                url: "/HealthRecord/Create?JsonData=" +/* JSON.stringify(PHR)*/JSON.stringify(formthis.serializeFormJSON()) +"&tablename=Prescription",
+                type: "POST",
+                data: { 
+                },
+                success: function (prescrid) {
+                    var jsondata = JSON.parse(prescrid);
+                    //alert(jsondata);
+                    ////alert(JSON.stringify(prescrid));
+                    var method = $('#InputPrescreption').attr("data-method");
+                    if (method == "edit") {
+                        //$(obj).parent().parent().fadeOut();
+                        var oldpres = $('#OutputPrescreption').find("[data-preid='" + jsondata.PrescriptionId + "']");
+                        $(oldpres).replaceWith('<div data-preid=' + jsondata.PrescriptionId + ' style="background-color:#D9EDF7;margin-bottom:10%;padding:5%"><div> <b>Name:</b>' + jsondata.MedicineName + '<a href="#" data-presId=' + jsondata.PrescriptionId + ' onClick="editPrecreption(this)" class="fa fa-edit pull-right btn btn-warning btn-xs"></a></div><div> <b>Quantity:</b> ' + jsondata.Quantity + '</div><div>' + jsondata.UsageDirections + '</div></div>');
+
+                        //alert();
+                        //$(this).replaceWith("<div>" + $(this).text() + "</div>");
+                    }
+                    if (method=="add") { 
+                        $('#OutputPrescreption').append('<div data-preid=' + jsondata.PrescriptionId + ' style="background-color:#D9EDF7;margin-bottom:10%;padding:5%"><div> <b>Name:</b>' + jsondata.MedicineName + '<a href="#" data-presId=' + jsondata.PrescriptionId + ' onClick="editPrecreption(this)" class="fa fa-edit pull-right btn btn-warning btn-xs"></a></div><div> <b>Quantity:</b> ' + jsondata.Quantity + '</div><div>' + jsondata.UsageDirections + '</div></div>');
+
+                    }
+                    //alert(JSON.stringify(PHR));
+                   
+                    $('#Exception').html(prescrid);
+                    //alert(PHR);
+                },
+                error: function () {
+                    //alert("error");
+                },
+                complete: function () {
+                 
+                }
+            });
+        }
+        
+        $('#addPrescreption').click(function () {
+            var presJson = '{\"PrescriptionId\":0,\"PatientHealthRecordId\":@ViewBag.HealthRecordId,\"MedicineName\":\"\",\"Quantity\":\"\",\"UsageDirections\":\"\",\"PatientHealthRecord\":null}'
+            populate('#formPrescription', $.parseJSON(presJson));
+            $('#InputPrescreption').removeAttr("hidden");
+            $('#InputPrescreption').attr("data-method", "add");
+            $('#addPrescreption').hide();
+            
+        });
+       
+        function editPrecreption(obj) {
+            $('#InputPrescreption').attr("data-method", "edit");
+            $.ajax({
+                beforeSend: function () {
+                   
+                  
+                   
+                },
+                url: "/HealthRecord/Edit?id=" + $(obj).attr('data-presId') + "&tablename=Prescription",
+                type: "POST",
+                data: {
+                },
+                success: function (jsondata) {
+                   
+                    $('#addPrescreption').hide();
+                    $('#InputPrescreption').removeAttr("hidden");
+                   
+                    //alert(JSON.stringify(jsondata));
+                    populate('#formPrescription', $.parseJSON(jsondata));
+                    //$('#formPrescription').loadJSON(jsondata);
+                    //alert("papulat");
+                    $('#Exception').html(JSON.stringify(jsondata));
+                    
+                    
+                },
+                error: function () {
+                    //alert("error");
+                },
+                complete: function () {
+
+                }
+            });
+            //$('#InputPrescreption').removeAttr("hidden");
+            //$('#addPrescreption').hide();
+            //alert($(obj).attr('data-presId') );
+        }
+
+        var deletePrescreption = function () {
+            //alert("del");
+            var preid = $('#PrescriptionId').val();
+            $.ajax({
+                beforeSend: function () {
+
+                },
+                url: "/HealthRecord/Delete?id=" + preid + "&tablename=Prescription" ,
+                type: "POST",
+                error: function () {
+                    alert("del err");
+                },
+                success: function (result) {
+                    if (result == "1") {
+                        $('#InputPrescreption').attr("hidden", "true");
+                    $('#addPrescreption').show();
+                   
+                    var oldpres = $('#OutputPrescreption').find("[data-preid='" + preid + "']");
+                    $(oldpres).fadeOut();
+                    }
+                    if (result == "0") {
+                        //alert("del");
+                    }
+
+                },
+                data: function (result) {
+
+                },
+                complete: function (result) {
+
+                }
+
+            });
+            //$.ajax({
+            //    beforeSend: function () {
+                    
+            //    },
+            //    url: "/HealthRecord/Delete?id=" + $(obj).attr('data-presId') + "&tablename=Prescription",
+            //    type: "POST",
+            //    data: {
+            //    },
+            //    success: function (jsondata) {
+            //        //$('#InputPrescreption').attr("hidden", "true");
+            //        //$('#addPrescreption').show();
+            //        //var preid = $('#PrescriptionId').val();
+            //        //var oldpres = $('#OutputPrescreption').find("[data-preid='" + preid + "']");
+            //        //$(oldpres).fadeOut();
+
+            //        alert(preid);
+            //    },
+            //    error: function () {
+            //        alert("error");
+            //    },
+            //    complete: function () {
+
+            //    }
+            //});
+        }
+
+        var backPrescreption = function () { 
+            $('#InputPrescreption').attr("hidden", "true");
+            $('#addPrescreption').show();
+        }
+         //End Prescreption
+  
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

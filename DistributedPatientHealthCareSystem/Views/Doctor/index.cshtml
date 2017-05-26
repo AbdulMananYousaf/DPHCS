@@ -68,7 +68,7 @@
                 int postpond = Db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Postpond").Count();
                 int completed = Db.Appointment.Where(a => a.DoctorEmployeeId.ToString() == User.Identity.Name && a.AppointmentStatus == "Completed").Count();
 
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs" style="margin-top:5%">
         <li class="active col-md-4"><a class="text-center" data-toggle="tab" href="#home">Pending Appointments 
             <span class="badge badge-pending">@Pending</span></a></li>
         <li class="col-md-4"><a class="text-center" data-toggle="tab" href="#menu1">Postpond Appointments

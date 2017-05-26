@@ -11,7 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DistributedPatientHealthCareSystem.Controllers
 {
-    [Authorize(Roles ="Receptionist")]
+    
+    //[Authorize(Roles ="Receptionist")]
+    [Authorize(Roles ="Receptionist,Doctor")]
     public class PatientController : Controller
     {
         private readonly DPHCSContext _context;
@@ -24,6 +26,25 @@ namespace DistributedPatientHealthCareSystem.Controllers
         // GET: Patient
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole("Doctor")) {
+
+                var phr = _context.PatientHealthRecord.Where(d => d.DoctorEmployeeId.ToString() == User.Identity.Name);
+                var PatientList = new List<Patient>();
+                foreach (var item in phr)
+                {
+                    if (item.DoctorEmployeeId.ToString()==User.Identity.Name) {
+                        var r=PatientList.Find(p=>p.PatientId== item.PatientId);
+                        if (r == null)
+                        {
+                            var patient = _context.Patient.Include(p => p.PatientNavigation).FirstOrDefault(p => p.PatientId == item.PatientId);
+                            PatientList.Add(patient);
+                        }
+                       
+                    }
+                }
+                
+                return View(PatientList);
+            }
             ViewBag.Role = HttpContext.Session.GetString("Role");
             var dPHCSContext = _context.Patient.Include(p => p.PatientNavigation);
             return View(await dPHCSContext.ToListAsync());
@@ -60,6 +81,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
         // POST: Patient/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Receptionist")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PatientId,RegDate,PatientNavigation")] Patient patient)
@@ -80,6 +102,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
             return View(patient);
         }
 
+        [Authorize(Roles = "Receptionist")]
         // GET: Patient/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -103,6 +126,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
         // POST: Patient/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Receptionist")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PatientId,RegDate,PatientNavigation")] Patient patient)
@@ -138,7 +162,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
             ViewData["PatientId"] = new SelectList(_context.Person, "PersonId", "Address", patient.PatientId);
             return View(patient);
         }
-
+        [Authorize(Roles = "Receptionist")]
         // GET: Patient/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

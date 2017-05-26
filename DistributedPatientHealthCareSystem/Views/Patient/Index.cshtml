@@ -5,15 +5,11 @@
     Layout = "_AdminLayout";
 }
 
-<h2>Index</h2>
+<p style="margin-top:3%">
+    <a class="btn btn-primary btn-sm" asp-action="Create"><i class="fa fa-plus"></i> Add new Patient</a>
+</p>
 
-<p>
-    <a asp-action="Create">Add new Patient</a>
-</p>
-<p>
-    <a asp-action="Index" asp-controller="Appointment">Add new Appointmnet</a>
-</p>
-<table class="table">
+<table class="table" style="margin-top:3%">
     <thead>
         <tr>
      
@@ -57,9 +53,19 @@
           
             
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PatientId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PatientId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PatientId">Delete</a>
+                @{
+                    if (User.IsInRole("Receptionist"))
+                    {
+                       <a asp-action="Edit" asp-route-id="@item.PatientId">Edit</a> 
+                        <a asp-action="Details" asp-route-id="@item.PatientId">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.PatientId">Delete</a> 
+                     }
+                    @if (User.IsInRole("Doctor"))
+                    {
+                        <a asp-controller="HealthRecord" asp-action="Index" asp-route-id="@item.PatientId">Health Record</a>
+                    }
+                }
+               
             </td>
         </tr>
 }
