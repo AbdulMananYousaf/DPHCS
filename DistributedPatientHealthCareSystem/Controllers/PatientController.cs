@@ -70,6 +70,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
             return View(patient);
         }
 
+        [Authorize(Roles = "Receptionist")]
         // GET: Patient/Create
         public IActionResult Create()
         {

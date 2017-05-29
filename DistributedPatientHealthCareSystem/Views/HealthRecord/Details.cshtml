@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    //Layout =null;
 }
 @{int PatientId = ViewBag.PatientId;}
 <div>PatientID:@ViewBag.PatientId</div>
@@ -15,7 +14,7 @@
     }
 
 </style>
-<a href='javascript:editPrecreption();'>fvd</a>
+@* Start Prescription *@
 <div class="col-md-3">
     <div class="panel panel-primary">
         <div class="panel-heading">Prescription</div>
@@ -26,10 +25,17 @@
                 @foreach (var item in Model.PatientPrescription)
                 {
                     <div data-preid= @item.PrescriptionId  style="background-color:#D9EDF7;margin-bottom:10%;padding:5%">
-                        <div>
-                            <b>Name:</b>  @item.MedicineName  
-                            <a href="#" data-presId=' + @item.PrescriptionId + ' onClick="editPrecreption(this)" class="fa fa-edit pull-right btn btn-warning btn-xs"></a>
+                        <div >
+                            <div class="col-md-8" style="padding:0%; word-break: break-all;margin:0%" >
+                                <b>Name:</b>  @item.MedicineName
+                                
+                            </div>
+                            <div class="col-md-4" style="padding:0%">
+                                <a href="#" data-presId=' + @item.PrescriptionId + ' onClick="editPrecreption(this)" class="fa fa-edit pull-right btn btn-warning btn-xs"></a>
+
+                            </div>
                         </div>
+                        <div class="clearfix"></div>
                         <div> <b>Quantity:</b> @item.Quantity</div>
                         <div>@item.UsageDirections</div>
                     </div>
@@ -66,7 +72,7 @@
                         &nbsp;&nbsp;<b id="themecolor">Drug</b>
                        <a href="javascript:savePrescreption()"><i class="fa fa-check btn btn-success btn-xs pull-right"></i></a> 
                       @* <button id="PrescreptionSave" type="submit" class="fa fa-check btn btn-success btn-xs pull-right"></button>*@
-                        <a href="javascript:deletePrescreption()"><i class="fa fa-trash btn btn-danger btn-xs  pull-right"></i></a>
+                        <a href="javascript:deletePrescreption()" id="deletePrescreption"><i class="fa fa-trash btn btn-danger btn-xs  pull-right"></i></a>
                        
                        
                       
@@ -83,6 +89,11 @@
         </div>
     </div>
 </div>
+@* End Prescription *@
+
+@* Start Allergy *@
+
+@* End Allergy *@
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -90,25 +101,10 @@
 
 @section Scripts {
     <script>
-     
-        var PHR = {
-            "HealthRecordId": @ViewBag.HealthRecordId,
-            "DoctorEmployeeId": @User.Identity.Name,
-            "HospitalId": 1,
-            "PatientId": @ViewBag.PatientId,
-            "LabTestOrder": [],
-            "LabTestResult": [],
-            "PatientAllergie": [],
-            "PatientPrescription": [],
-            "PatientVital": [],
-            "TestBloodGroup": [],
-            "DoctorEmployee": null,
-            "Hospital": null,
-            "Patient": null
-        };
-        PHR.DoctorEmployeeId =@User.Identity.Name
-           
-            //#region Start General Functions
+
+
+         //Start General Functions
+            //#region General Functions
         $.fn.serializeFormJSON = function () {
             var o = {};
             var a = this.serializeArray();
@@ -138,30 +134,39 @@
                 }
             });
         }
-         // #endregion End General Functions 
+         // #endregion End General Functions
+          // End General Functions
 
-        
- //Start Prescreption
-        
+        //Start 
+        //#region
+
+        //#endregion
+        //End
+
+         //Start Allergy
+        //#region Allergy
+
+        //#endregion
+        //End Allergy
+
+         //Start Prescreption
+        //#region Prescreption
         var CountPrescription=0;
         var savePrescreption = function () {
-           
+
             $('#InputPrescreption').attr("hidden", "true");
             $('#addPrescreption').show();
             var formthis = $('#formPrescription');
-            //PHR.PatientPrescription[CountPrescription] = formthis.serializeFormJSON();
-            PHR.PatientPrescription[CountPrescription] = formthis.serializeFormJSON();
-            //populate('#formPrescription', PHR.PatientPrescription[CountPrescription]);
+
             var jsondata = JSON.stringify(formthis.serializeFormJSON());
-          
-            //PHR.PatientPrescription.push(formthis.serializeFormJSON());
+
             $.ajax({
                 beforeSend: function () {
-                   
+
                 },
                 url: "/HealthRecord/Create?JsonData=" +/* JSON.stringify(PHR)*/JSON.stringify(formthis.serializeFormJSON()) +"&tablename=Prescription",
                 type: "POST",
-                data: { 
+                data: {
                 },
                 success: function (prescrid) {
                     var jsondata = JSON.parse(prescrid);
@@ -176,12 +181,12 @@
                         //alert();
                         //$(this).replaceWith("<div>" + $(this).text() + "</div>");
                     }
-                    if (method=="add") { 
+                    if (method=="add") {
                         $('#OutputPrescreption').append('<div data-preid=' + jsondata.PrescriptionId + ' style="background-color:#D9EDF7;margin-bottom:10%;padding:5%"><div> <b>Name:</b>' + jsondata.MedicineName + '<a href="#" data-presId=' + jsondata.PrescriptionId + ' onClick="editPrecreption(this)" class="fa fa-edit pull-right btn btn-warning btn-xs"></a></div><div> <b>Quantity:</b> ' + jsondata.Quantity + '</div><div>' + jsondata.UsageDirections + '</div></div>');
 
                     }
                     //alert(JSON.stringify(PHR));
-                   
+
                     $('#Exception').html(prescrid);
                     //alert(PHR);
                 },
@@ -189,44 +194,38 @@
                     //alert("error");
                 },
                 complete: function () {
-                 
+
                 }
             });
         }
-        
-        $('#addPrescreption').click(function () {
-            var presJson = '{\"PrescriptionId\":0,\"PatientHealthRecordId\":@ViewBag.HealthRecordId,\"MedicineName\":\"\",\"Quantity\":\"\",\"UsageDirections\":\"\",\"PatientHealthRecord\":null}'
-            populate('#formPrescription', $.parseJSON(presJson));
-            $('#InputPrescreption').removeAttr("hidden");
-            $('#InputPrescreption').attr("data-method", "add");
-            $('#addPrescreption').hide();
-            
-        });
-       
+
+
+
         function editPrecreption(obj) {
             $('#InputPrescreption').attr("data-method", "edit");
+            $('#deletePrescreption').show();
             $.ajax({
                 beforeSend: function () {
-                   
-                  
-                   
+
+
+
                 },
                 url: "/HealthRecord/Edit?id=" + $(obj).attr('data-presId') + "&tablename=Prescription",
                 type: "POST",
                 data: {
                 },
                 success: function (jsondata) {
-                   
+
                     $('#addPrescreption').hide();
                     $('#InputPrescreption').removeAttr("hidden");
-                   
+
                     //alert(JSON.stringify(jsondata));
                     populate('#formPrescription', $.parseJSON(jsondata));
                     //$('#formPrescription').loadJSON(jsondata);
                     //alert("papulat");
                     $('#Exception').html(JSON.stringify(jsondata));
-                    
-                    
+
+
                 },
                 error: function () {
                     //alert("error");
@@ -256,7 +255,7 @@
                     if (result == "1") {
                         $('#InputPrescreption').attr("hidden", "true");
                     $('#addPrescreption').show();
-                   
+
                     var oldpres = $('#OutputPrescreption').find("[data-preid='" + preid + "']");
                     $(oldpres).fadeOut();
                     }
@@ -273,38 +272,24 @@
                 }
 
             });
-            //$.ajax({
-            //    beforeSend: function () {
-                    
-            //    },
-            //    url: "/HealthRecord/Delete?id=" + $(obj).attr('data-presId') + "&tablename=Prescription",
-            //    type: "POST",
-            //    data: {
-            //    },
-            //    success: function (jsondata) {
-            //        //$('#InputPrescreption').attr("hidden", "true");
-            //        //$('#addPrescreption').show();
-            //        //var preid = $('#PrescriptionId').val();
-            //        //var oldpres = $('#OutputPrescreption').find("[data-preid='" + preid + "']");
-            //        //$(oldpres).fadeOut();
-
-            //        alert(preid);
-            //    },
-            //    error: function () {
-            //        alert("error");
-            //    },
-            //    complete: function () {
-
-            //    }
-            //});
         }
 
-        var backPrescreption = function () { 
+        var backPrescreption = function () {
             $('#InputPrescreption').attr("hidden", "true");
             $('#addPrescreption').show();
         }
-         //End Prescreption
-  
+        //#endregion Pre
+           $('#addPrescreption').click(function () {
+            var presJson = '{\"PrescriptionId\":0,\"PatientHealthRecordId\":@ViewBag.HealthRecordId,\"MedicineName\":\"\",\"Quantity\":\"\",\"UsageDirections\":\"\",\"PatientHealthRecord\":null}'
+            populate('#formPrescription', $.parseJSON(presJson));
+            $('#deletePrescreption').hide();
+            $('#InputPrescreption').removeAttr("hidden");
+            $('#InputPrescreption').attr("data-method", "add");
+            $('#addPrescreption').hide();
+
+        });
+        //End Prescreption
+
     </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

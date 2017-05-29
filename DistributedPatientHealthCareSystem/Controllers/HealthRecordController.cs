@@ -65,6 +65,7 @@ namespace DistributedPatientHealthCareSystem.Controllers
             var patientHealthRecord = await _context.PatientHealthRecord
                 .Include(p => p.Patient)
                 .Include(p=>p.PatientPrescription)
+                .Include(p => p.PatientAllergie)
                 .SingleOrDefaultAsync(m => m.HealthRecordId == id);
             if (patientHealthRecord == null)
             {

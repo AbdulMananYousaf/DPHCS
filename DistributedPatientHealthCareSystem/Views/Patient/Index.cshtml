@@ -5,9 +5,12 @@
     Layout = "_AdminLayout";
 }
 
-<p style="margin-top:3%">
-    <a class="btn btn-primary btn-sm" asp-action="Create"><i class="fa fa-plus"></i> Add new Patient</a>
-</p>
+@if (User.IsInRole("Receptionist")) {
+    <p style="margin-top:3%">
+        <a class="btn btn-primary btn-sm" asp-action="Create"><i class="fa fa-plus"></i> Add new Patient</a>
+    </p>
+ }
+
 
 <table class="table" style="margin-top:3%">
     <thead>
