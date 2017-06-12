@@ -14,7 +14,7 @@ using DistributedPatientHealthCareSystem.Models.AccountViewModels;
 using DistributedPatientHealthCareSystem.Services;
     
 namespace DistributedPatientHealthCareSystem.Controllers
-{
+{   
     [Authorize]
     public class AccountController : Controller
     {
