@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 using DistributedPatientHealthCareSystem.Models;
 using DistributedPatientHealthCareSystem.Models.AccountViewModels;
 using DistributedPatientHealthCareSystem.Services;
-
+    
 namespace DistributedPatientHealthCareSystem.Controllers
 {
     [Authorize]
