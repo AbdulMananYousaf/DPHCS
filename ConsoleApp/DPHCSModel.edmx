@@ -1,0 +1,1440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DPHCSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppointmentStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="50" />
+          <Property Name="DoctorEmployeeId" Type="int" Nullable="false" />
+          <Property Name="HeldDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="ReceptionistEmployeetId" Type="int" Nullable="false" />
+          <Property Name="SetedDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VisitReson" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatientLastVisitDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoleClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="ConcurrencyStamp" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="ConcurrencyStamp" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEnd" Type="datetimeoffset" Precision="7" />
+          <Property Name="NormalizedEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedUserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="DoctorSpecializationList">
+          <Key>
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="Value" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="JoinDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="Spectialization" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hospital">
+          <Key>
+            <PropertyRef Name="HospitalId" />
+          </Key>
+          <Property Name="HospitalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="API" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WebSite" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabTestOrder">
+          <Key>
+            <PropertyRef Name="LabTestOrderId" />
+          </Key>
+          <Property Name="LabTestOrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="50" />
+          <Property Name="PatientHealthRecordId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TestTableName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabTestResult">
+          <Key>
+            <PropertyRef Name="TestResultId" />
+          </Key>
+          <Property Name="TestResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientHealthRecordId" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="LabTestOrderId" Type="int" Nullable="false" />
+          <Property Name="TestTableName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TestTableRow" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="RegDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientAllergie">
+          <Key>
+            <PropertyRef Name="AllergyId" />
+          </Key>
+          <Property Name="AllergyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="50" />
+          <Property Name="PatientHealthRecordId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientHealthRecord">
+          <Key>
+            <PropertyRef Name="HealthRecordId" />
+          </Key>
+          <Property Name="HealthRecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorEmployeeId" Type="int" Nullable="false" />
+          <Property Name="HospitalId" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientPrescription">
+          <Key>
+            <PropertyRef Name="PrescriptionId" />
+          </Key>
+          <Property Name="PrescriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientHealthRecordId" Type="int" Nullable="false" />
+          <Property Name="MedicineName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UsageDirections" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientVital">
+          <Key>
+            <PropertyRef Name="VitalId" />
+          </Key>
+          <Property Name="VitalId" Type="int" Nullable="false" />
+          <Property Name="PatientHealthRecordId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="CNIC" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoB" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfilePic" Type="nvarchar(max)" />
+          <Property Name="Age" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TestBloodGroup">
+          <Key>
+            <PropertyRef Name="BloodTestTestId" />
+          </Key>
+          <Property Name="BloodTestTestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LabEmployeeId" Type="int" Nullable="false" />
+          <Property Name="GeneratedDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HealthRecordId" Type="int" Nullable="false" />
+          <Property Name="Result" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserAccountId" />
+          </Key>
+          <Property Name="UserAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserConnection">
+          <Key>
+            <PropertyRef Name="ConnectionID" />
+          </Key>
+          <Property Name="ConnectionID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Allergies_PatientHealthRecords">
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="1" />
+          <End Role="PatientAllergie" Type="Self.PatientAllergie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="PatientAllergie">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointment_DoctorEmployeeId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DoctorEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointment_ReceptionistEmployee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="ReceptionistEmployeetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointments_Patients">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetRoleClaims" Type="Self.AspNetRoleClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetRoleClaims">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserClaims_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BloodGroupTests_HealthRecords">
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="1" />
+          <End Role="TestBloodGroup" Type="Self.TestBloodGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="TestBloodGroup">
+              <PropertyRef Name="HealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthRecords_Hospitals">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="HospitalId" />
+            </Principal>
+            <Dependent Role="PatientHealthRecord">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthRecords_PatientDetail">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="PatientHealthRecord">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthReportOrders_HealthRecords">
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="1" />
+          <End Role="LabTestOrder" Type="Self.LabTestOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="LabTestOrder">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabTestResult_[PatientHealthRecord">
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="1" />
+          <End Role="LabTestResult" Type="Self.LabTestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="LabTestResult">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabTestResult_LabTestOrder">
+          <End Role="LabTestOrder" Type="Self.LabTestOrder" Multiplicity="1" />
+          <End Role="LabTestResult" Type="Self.LabTestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabTestOrder">
+              <PropertyRef Name="LabTestOrderId" />
+            </Principal>
+            <Dependent Role="LabTestResult">
+              <PropertyRef Name="LabTestOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientHealthRecord_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="PatientHealthRecord">
+              <PropertyRef Name="DoctorEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserAccountId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescriptions_PatientHealthRecord">
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="1" />
+          <End Role="PatientPrescription" Type="Self.PatientPrescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="PatientPrescription">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestBloodGroup_LabEmplyeeId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="TestBloodGroup" Type="Self.TestBloodGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="TestBloodGroup">
+              <PropertyRef Name="LabEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vitals_PatientHealthRecord">
+          <End Role="PatientHealthRecord" Type="Self.PatientHealthRecord" Multiplicity="1" />
+          <End Role="PatientVital" Type="Self.PatientVital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="PatientVital">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DPHCSModelStoreContainer">
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoleClaims" EntityType="Self.AspNetRoleClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorSpecializationList" EntityType="Self.DoctorSpecializationList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabTestOrder" EntityType="Self.LabTestOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LabTestResult" EntityType="Self.LabTestResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientAllergie" EntityType="Self.PatientAllergie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientHealthRecord" EntityType="Self.PatientHealthRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientPrescription" EntityType="Self.PatientPrescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientVital" EntityType="Self.PatientVital" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestBloodGroup" EntityType="Self.TestBloodGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserConnection" EntityType="Self.UserConnection" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Allergies_PatientHealthRecords" Association="Self.FK_Allergies_PatientHealthRecords">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="PatientAllergie" EntitySet="PatientAllergie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointment_DoctorEmployeeId" Association="Self.FK_Appointment_DoctorEmployeeId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointment_ReceptionistEmployee" Association="Self.FK_Appointment_ReceptionistEmployee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Patients" Association="Self.FK_Appointments_Patients">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetRoleClaims" EntitySet="AspNetRoleClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserClaims_AspNetUsers_UserId" Association="Self.FK_AspNetUserClaims_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles_RoleId" Association="Self.FK_AspNetUserRoles_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers_UserId" Association="Self.FK_AspNetUserRoles_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BloodGroupTests_HealthRecords" Association="Self.FK_BloodGroupTests_HealthRecords">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="TestBloodGroup" EntitySet="TestBloodGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Person" Association="Self.FK_Employee_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthRecords_Hospitals" Association="Self.FK_HealthRecords_Hospitals">
+            <End Role="Hospital" EntitySet="Hospital" />
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthRecords_PatientDetail" Association="Self.FK_HealthRecords_PatientDetail">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthReportOrders_HealthRecords" Association="Self.FK_HealthReportOrders_HealthRecords">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="LabTestOrder" EntitySet="LabTestOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabTestResult_[PatientHealthRecord" Association="Self.FK_LabTestResult_[PatientHealthRecord">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="LabTestResult" EntitySet="LabTestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabTestResult_LabTestOrder" Association="Self.FK_LabTestResult_LabTestOrder">
+            <End Role="LabTestOrder" EntitySet="LabTestOrder" />
+            <End Role="LabTestResult" EntitySet="LabTestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientHealthRecord_Employee" Association="Self.FK_PatientHealthRecord_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Person" Association="Self.FK_Patients_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_UserAccount" Association="Self.FK_Person_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescriptions_PatientHealthRecord" Association="Self.FK_Prescriptions_PatientHealthRecord">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="PatientPrescription" EntitySet="PatientPrescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestBloodGroup_LabEmplyeeId" Association="Self.FK_TestBloodGroup_LabEmplyeeId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="TestBloodGroup" EntitySet="TestBloodGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vitals_PatientHealthRecord" Association="Self.FK_Vitals_PatientHealthRecord">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="PatientVital" EntitySet="PatientVital" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DPHCSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DPHCSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appointment" EntityType="DPHCSModel.Appointment" />
+          <EntitySet Name="AspNetRoleClaims" EntityType="DPHCSModel.AspNetRoleClaims" />
+          <EntitySet Name="AspNetRoles" EntityType="DPHCSModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="DPHCSModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUsers" EntityType="DPHCSModel.AspNetUsers" />
+          <EntitySet Name="DoctorSpecializationList" EntityType="DPHCSModel.DoctorSpecializationList" />
+          <EntitySet Name="Employee" EntityType="DPHCSModel.Employee" />
+          <EntitySet Name="Hospital" EntityType="DPHCSModel.Hospital" />
+          <EntitySet Name="LabTestOrder" EntityType="DPHCSModel.LabTestOrder" />
+          <EntitySet Name="LabTestResult" EntityType="DPHCSModel.LabTestResult" />
+          <EntitySet Name="Patient" EntityType="DPHCSModel.Patient" />
+          <EntitySet Name="PatientAllergie" EntityType="DPHCSModel.PatientAllergie" />
+          <EntitySet Name="PatientHealthRecord" EntityType="DPHCSModel.PatientHealthRecord" />
+          <EntitySet Name="PatientPrescription" EntityType="DPHCSModel.PatientPrescription" />
+          <EntitySet Name="PatientVital" EntityType="DPHCSModel.PatientVital" />
+          <EntitySet Name="Person" EntityType="DPHCSModel.Person" />
+          <EntitySet Name="sysdiagrams" EntityType="DPHCSModel.sysdiagrams" />
+          <EntitySet Name="TestBloodGroup" EntityType="DPHCSModel.TestBloodGroup" />
+          <EntitySet Name="UserAccount" EntityType="DPHCSModel.UserAccount" />
+          <EntitySet Name="UserConnection" EntityType="DPHCSModel.UserConnection" />
+          <AssociationSet Name="FK_Appointment_DoctorEmployeeId" Association="DPHCSModel.FK_Appointment_DoctorEmployeeId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointment_ReceptionistEmployee" Association="DPHCSModel.FK_Appointment_ReceptionistEmployee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Patients" Association="DPHCSModel.FK_Appointments_Patients">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="DPHCSModel.FK_AspNetRoleClaims_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetRoleClaims" EntitySet="AspNetRoleClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserClaims_AspNetUsers_UserId" Association="DPHCSModel.FK_AspNetUserClaims_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Person" Association="DPHCSModel.FK_Employee_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientHealthRecord_Employee" Association="DPHCSModel.FK_PatientHealthRecord_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestBloodGroup_LabEmplyeeId" Association="DPHCSModel.FK_TestBloodGroup_LabEmplyeeId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="TestBloodGroup" EntitySet="TestBloodGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthRecords_Hospitals" Association="DPHCSModel.FK_HealthRecords_Hospitals">
+            <End Role="Hospital" EntitySet="Hospital" />
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthReportOrders_HealthRecords" Association="DPHCSModel.FK_HealthReportOrders_HealthRecords">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="LabTestOrder" EntitySet="LabTestOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabTestResult_LabTestOrder" Association="DPHCSModel.FK_LabTestResult_LabTestOrder">
+            <End Role="LabTestOrder" EntitySet="LabTestOrder" />
+            <End Role="LabTestResult" EntitySet="LabTestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabTestResult__PatientHealthRecord" Association="DPHCSModel.FK_LabTestResult__PatientHealthRecord">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="LabTestResult" EntitySet="LabTestResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthRecords_PatientDetail" Association="DPHCSModel.FK_HealthRecords_PatientDetail">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Person" Association="DPHCSModel.FK_Patients_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Allergies_PatientHealthRecords" Association="DPHCSModel.FK_Allergies_PatientHealthRecords">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="PatientAllergie" EntitySet="PatientAllergie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BloodGroupTests_HealthRecords" Association="DPHCSModel.FK_BloodGroupTests_HealthRecords">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="TestBloodGroup" EntitySet="TestBloodGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescriptions_PatientHealthRecord" Association="DPHCSModel.FK_Prescriptions_PatientHealthRecord">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="PatientPrescription" EntitySet="PatientPrescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vitals_PatientHealthRecord" Association="DPHCSModel.FK_Vitals_PatientHealthRecord">
+            <End Role="PatientHealthRecord" EntitySet="PatientHealthRecord" />
+            <End Role="PatientVital" EntitySet="PatientVital" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_UserAccount" Association="DPHCSModel.FK_Person_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="DPHCSModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppointmentStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorEmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="HeldDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="ReceptionistEmployeetId" Type="Int32" Nullable="false" />
+          <Property Name="SetedDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VisitReson" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PatientLastVisitDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="DPHCSModel.FK_Appointment_DoctorEmployeeId" FromRole="Appointment" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="DPHCSModel.FK_Appointment_ReceptionistEmployee" FromRole="Appointment" ToRole="Employee" />
+          <NavigationProperty Name="Patient" Relationship="DPHCSModel.FK_Appointments_Patients" FromRole="Appointment" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="AspNetRoleClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="DPHCSModel.FK_AspNetRoleClaims_AspNetRoles_RoleId" FromRole="AspNetRoleClaims" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoleClaims" Relationship="DPHCSModel.FK_AspNetRoleClaims_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetRoleClaims" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DPHCSModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DPHCSModel.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEnd" Type="DateTimeOffset" Precision="7" />
+          <Property Name="NormalizedEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="DPHCSModel.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetRoles" Relationship="DPHCSModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="DoctorSpecializationList">
+          <Key>
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="Value" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="JoinDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="Spectialization" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Appointment" Relationship="DPHCSModel.FK_Appointment_DoctorEmployeeId" FromRole="Employee" ToRole="Appointment" />
+          <NavigationProperty Name="Appointment1" Relationship="DPHCSModel.FK_Appointment_ReceptionistEmployee" FromRole="Employee" ToRole="Appointment" />
+          <NavigationProperty Name="Person" Relationship="DPHCSModel.FK_Employee_Person" FromRole="Employee" ToRole="Person" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_PatientHealthRecord_Employee" FromRole="Employee" ToRole="PatientHealthRecord" />
+          <NavigationProperty Name="TestBloodGroup" Relationship="DPHCSModel.FK_TestBloodGroup_LabEmplyeeId" FromRole="Employee" ToRole="TestBloodGroup" />
+        </EntityType>
+        <EntityType Name="Hospital">
+          <Key>
+            <PropertyRef Name="HospitalId" />
+          </Key>
+          <Property Name="HospitalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="API" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WebSite" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_HealthRecords_Hospitals" FromRole="Hospital" ToRole="PatientHealthRecord" />
+        </EntityType>
+        <EntityType Name="LabTestOrder">
+          <Key>
+            <PropertyRef Name="LabTestOrderId" />
+          </Key>
+          <Property Name="LabTestOrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Discription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PatientHealthRecordId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TestTableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_HealthReportOrders_HealthRecords" FromRole="LabTestOrder" ToRole="PatientHealthRecord" />
+          <NavigationProperty Name="LabTestResult" Relationship="DPHCSModel.FK_LabTestResult_LabTestOrder" FromRole="LabTestOrder" ToRole="LabTestResult" />
+        </EntityType>
+        <EntityType Name="LabTestResult">
+          <Key>
+            <PropertyRef Name="TestResultId" />
+          </Key>
+          <Property Name="TestResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientHealthRecordId" Type="Int32" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="LabTestOrderId" Type="Int32" Nullable="false" />
+          <Property Name="TestTableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TestTableRow" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LabTestOrder" Relationship="DPHCSModel.FK_LabTestResult_LabTestOrder" FromRole="LabTestResult" ToRole="LabTestOrder" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_LabTestResult__PatientHealthRecord" FromRole="LabTestResult" ToRole="PatientHealthRecord" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="RegDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Appointment" Relationship="DPHCSModel.FK_Appointments_Patients" FromRole="Patient" ToRole="Appointment" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_HealthRecords_PatientDetail" FromRole="Patient" ToRole="PatientHealthRecord" />
+          <NavigationProperty Name="Person" Relationship="DPHCSModel.FK_Patients_Person" FromRole="Patient" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="PatientAllergie">
+          <Key>
+            <PropertyRef Name="AllergyId" />
+          </Key>
+          <Property Name="AllergyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Discription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PatientHealthRecordId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_Allergies_PatientHealthRecords" FromRole="PatientAllergie" ToRole="PatientHealthRecord" />
+        </EntityType>
+        <EntityType Name="PatientHealthRecord">
+          <Key>
+            <PropertyRef Name="HealthRecordId" />
+          </Key>
+          <Property Name="HealthRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorEmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DPHCSModel.FK_PatientHealthRecord_Employee" FromRole="PatientHealthRecord" ToRole="Employee" />
+          <NavigationProperty Name="Hospital" Relationship="DPHCSModel.FK_HealthRecords_Hospitals" FromRole="PatientHealthRecord" ToRole="Hospital" />
+          <NavigationProperty Name="LabTestOrder" Relationship="DPHCSModel.FK_HealthReportOrders_HealthRecords" FromRole="PatientHealthRecord" ToRole="LabTestOrder" />
+          <NavigationProperty Name="LabTestResult" Relationship="DPHCSModel.FK_LabTestResult__PatientHealthRecord" FromRole="PatientHealthRecord" ToRole="LabTestResult" />
+          <NavigationProperty Name="Patient" Relationship="DPHCSModel.FK_HealthRecords_PatientDetail" FromRole="PatientHealthRecord" ToRole="Patient" />
+          <NavigationProperty Name="PatientAllergie" Relationship="DPHCSModel.FK_Allergies_PatientHealthRecords" FromRole="PatientHealthRecord" ToRole="PatientAllergie" />
+          <NavigationProperty Name="TestBloodGroup" Relationship="DPHCSModel.FK_BloodGroupTests_HealthRecords" FromRole="PatientHealthRecord" ToRole="TestBloodGroup" />
+          <NavigationProperty Name="PatientPrescription" Relationship="DPHCSModel.FK_Prescriptions_PatientHealthRecord" FromRole="PatientHealthRecord" ToRole="PatientPrescription" />
+          <NavigationProperty Name="PatientVital" Relationship="DPHCSModel.FK_Vitals_PatientHealthRecord" FromRole="PatientHealthRecord" ToRole="PatientVital" />
+        </EntityType>
+        <EntityType Name="PatientPrescription">
+          <Key>
+            <PropertyRef Name="PrescriptionId" />
+          </Key>
+          <Property Name="PrescriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientHealthRecordId" Type="Int32" Nullable="false" />
+          <Property Name="MedicineName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UsageDirections" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_Prescriptions_PatientHealthRecord" FromRole="PatientPrescription" ToRole="PatientHealthRecord" />
+        </EntityType>
+        <EntityType Name="PatientVital">
+          <Key>
+            <PropertyRef Name="VitalId" />
+          </Key>
+          <Property Name="VitalId" Type="Int32" Nullable="false" />
+          <Property Name="PatientHealthRecordId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_Vitals_PatientHealthRecord" FromRole="PatientVital" ToRole="PatientHealthRecord" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoB" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="DPHCSModel.FK_Employee_Person" FromRole="Person" ToRole="Employee" />
+          <NavigationProperty Name="Patient" Relationship="DPHCSModel.FK_Patients_Person" FromRole="Person" ToRole="Patient" />
+          <NavigationProperty Name="UserAccount" Relationship="DPHCSModel.FK_Person_UserAccount" FromRole="Person" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TestBloodGroup">
+          <Key>
+            <PropertyRef Name="BloodTestTestId" />
+          </Key>
+          <Property Name="BloodTestTestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LabEmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="GeneratedDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HealthRecordId" Type="Int32" Nullable="false" />
+          <Property Name="Result" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="DPHCSModel.FK_TestBloodGroup_LabEmplyeeId" FromRole="TestBloodGroup" ToRole="Employee" />
+          <NavigationProperty Name="PatientHealthRecord" Relationship="DPHCSModel.FK_BloodGroupTests_HealthRecords" FromRole="TestBloodGroup" ToRole="PatientHealthRecord" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserAccountId" />
+          </Key>
+          <Property Name="UserAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="DPHCSModel.FK_Person_UserAccount" FromRole="UserAccount" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="UserConnection">
+          <Key>
+            <PropertyRef Name="ConnectionID" />
+          </Key>
+          <Property Name="ConnectionID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Appointment_DoctorEmployeeId">
+          <End Type="DPHCSModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DPHCSModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DoctorEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointment_ReceptionistEmployee">
+          <End Type="DPHCSModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DPHCSModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="ReceptionistEmployeetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointments_Patients">
+          <End Type="DPHCSModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="DPHCSModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
+          <End Type="DPHCSModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DPHCSModel.AspNetRoleClaims" Role="AspNetRoleClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetRoleClaims">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserClaims_AspNetUsers_UserId">
+          <End Type="DPHCSModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DPHCSModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Person">
+          <End Type="DPHCSModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="DPHCSModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientHealthRecord_Employee">
+          <End Type="DPHCSModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="PatientHealthRecord">
+              <PropertyRef Name="DoctorEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestBloodGroup_LabEmplyeeId">
+          <End Type="DPHCSModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DPHCSModel.TestBloodGroup" Role="TestBloodGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="TestBloodGroup">
+              <PropertyRef Name="LabEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthRecords_Hospitals">
+          <End Type="DPHCSModel.Hospital" Role="Hospital" Multiplicity="1" />
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="HospitalId" />
+            </Principal>
+            <Dependent Role="PatientHealthRecord">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthReportOrders_HealthRecords">
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="1" />
+          <End Type="DPHCSModel.LabTestOrder" Role="LabTestOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="LabTestOrder">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabTestResult_LabTestOrder">
+          <End Type="DPHCSModel.LabTestOrder" Role="LabTestOrder" Multiplicity="1" />
+          <End Type="DPHCSModel.LabTestResult" Role="LabTestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabTestOrder">
+              <PropertyRef Name="LabTestOrderId" />
+            </Principal>
+            <Dependent Role="LabTestResult">
+              <PropertyRef Name="LabTestOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabTestResult__PatientHealthRecord">
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="1" />
+          <End Type="DPHCSModel.LabTestResult" Role="LabTestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="LabTestResult">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthRecords_PatientDetail">
+          <End Type="DPHCSModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="PatientHealthRecord">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Person">
+          <End Type="DPHCSModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="DPHCSModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Allergies_PatientHealthRecords">
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="1" />
+          <End Type="DPHCSModel.PatientAllergie" Role="PatientAllergie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="PatientAllergie">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BloodGroupTests_HealthRecords">
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="1" />
+          <End Type="DPHCSModel.TestBloodGroup" Role="TestBloodGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="TestBloodGroup">
+              <PropertyRef Name="HealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescriptions_PatientHealthRecord">
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="1" />
+          <End Type="DPHCSModel.PatientPrescription" Role="PatientPrescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="PatientPrescription">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vitals_PatientHealthRecord">
+          <End Type="DPHCSModel.PatientHealthRecord" Role="PatientHealthRecord" Multiplicity="1" />
+          <End Type="DPHCSModel.PatientVital" Role="PatientVital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientHealthRecord">
+              <PropertyRef Name="HealthRecordId" />
+            </Principal>
+            <Dependent Role="PatientVital">
+              <PropertyRef Name="PatientHealthRecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_UserAccount">
+          <End Type="DPHCSModel.UserAccount" Role="UserAccount" Multiplicity="1" />
+          <End Type="DPHCSModel.Person" Role="Person" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserAccountId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="DPHCSModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="DPHCSModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DPHCSModelStoreContainer" CdmEntityContainer="DPHCSEntities">
+          <EntitySetMapping Name="Appointment">
+            <EntityTypeMapping TypeName="DPHCSModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="PatientLastVisitDate" ColumnName="PatientLastVisitDate" />
+                <ScalarProperty Name="VisitReson" ColumnName="VisitReson" />
+                <ScalarProperty Name="SetedDate" ColumnName="SetedDate" />
+                <ScalarProperty Name="ReceptionistEmployeetId" ColumnName="ReceptionistEmployeetId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="HeldDate" ColumnName="HeldDate" />
+                <ScalarProperty Name="DoctorEmployeeId" ColumnName="DoctorEmployeeId" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="AppointmentStatus" ColumnName="AppointmentStatus" />
+                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoleClaims">
+            <EntityTypeMapping TypeName="DPHCSModel.AspNetRoleClaims">
+              <MappingFragment StoreEntitySet="AspNetRoleClaims">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DPHCSModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="NormalizedName" ColumnName="NormalizedName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ConcurrencyStamp" ColumnName="ConcurrencyStamp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="DPHCSModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DPHCSModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="NormalizedUserName" ColumnName="NormalizedUserName" />
+                <ScalarProperty Name="NormalizedEmail" ColumnName="NormalizedEmail" />
+                <ScalarProperty Name="LockoutEnd" ColumnName="LockoutEnd" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ConcurrencyStamp" ColumnName="ConcurrencyStamp" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorSpecializationList">
+            <EntityTypeMapping TypeName="DPHCSModel.DoctorSpecializationList">
+              <MappingFragment StoreEntitySet="DoctorSpecializationList">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="DPHCSModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Spectialization" ColumnName="Spectialization" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hospital">
+            <EntityTypeMapping TypeName="DPHCSModel.Hospital">
+              <MappingFragment StoreEntitySet="Hospital">
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="API" ColumnName="API" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabTestOrder">
+            <EntityTypeMapping TypeName="DPHCSModel.LabTestOrder">
+              <MappingFragment StoreEntitySet="LabTestOrder">
+                <ScalarProperty Name="TestTableName" ColumnName="TestTableName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PatientHealthRecordId" ColumnName="PatientHealthRecordId" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="LabTestOrderId" ColumnName="LabTestOrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabTestResult">
+            <EntityTypeMapping TypeName="DPHCSModel.LabTestResult">
+              <MappingFragment StoreEntitySet="LabTestResult">
+                <ScalarProperty Name="TestTableRow" ColumnName="TestTableRow" />
+                <ScalarProperty Name="TestTableName" ColumnName="TestTableName" />
+                <ScalarProperty Name="LabTestOrderId" ColumnName="LabTestOrderId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="PatientHealthRecordId" ColumnName="PatientHealthRecordId" />
+                <ScalarProperty Name="TestResultId" ColumnName="TestResultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient">
+            <EntityTypeMapping TypeName="DPHCSModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientAllergie">
+            <EntityTypeMapping TypeName="DPHCSModel.PatientAllergie">
+              <MappingFragment StoreEntitySet="PatientAllergie">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PatientHealthRecordId" ColumnName="PatientHealthRecordId" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="AllergyId" ColumnName="AllergyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientHealthRecord">
+            <EntityTypeMapping TypeName="DPHCSModel.PatientHealthRecord">
+              <MappingFragment StoreEntitySet="PatientHealthRecord">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+                <ScalarProperty Name="DoctorEmployeeId" ColumnName="DoctorEmployeeId" />
+                <ScalarProperty Name="HealthRecordId" ColumnName="HealthRecordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientPrescription">
+            <EntityTypeMapping TypeName="DPHCSModel.PatientPrescription">
+              <MappingFragment StoreEntitySet="PatientPrescription">
+                <ScalarProperty Name="UsageDirections" ColumnName="UsageDirections" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MedicineName" ColumnName="MedicineName" />
+                <ScalarProperty Name="PatientHealthRecordId" ColumnName="PatientHealthRecordId" />
+                <ScalarProperty Name="PrescriptionId" ColumnName="PrescriptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientVital">
+            <EntityTypeMapping TypeName="DPHCSModel.PatientVital">
+              <MappingFragment StoreEntitySet="PatientVital">
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PatientHealthRecordId" ColumnName="PatientHealthRecordId" />
+                <ScalarProperty Name="VitalId" ColumnName="VitalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="DPHCSModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DPHCSModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestBloodGroup">
+            <EntityTypeMapping TypeName="DPHCSModel.TestBloodGroup">
+              <MappingFragment StoreEntitySet="TestBloodGroup">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="HealthRecordId" ColumnName="HealthRecordId" />
+                <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
+                <ScalarProperty Name="LabEmployeeId" ColumnName="LabEmployeeId" />
+                <ScalarProperty Name="BloodTestTestId" ColumnName="BloodTestTestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccount">
+            <EntityTypeMapping TypeName="DPHCSModel.UserAccount">
+              <MappingFragment StoreEntitySet="UserAccount">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserConnection">
+            <EntityTypeMapping TypeName="DPHCSModel.UserConnection">
+              <MappingFragment StoreEntitySet="UserConnection">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ConnectionID" ColumnName="ConnectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DPHCSModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
